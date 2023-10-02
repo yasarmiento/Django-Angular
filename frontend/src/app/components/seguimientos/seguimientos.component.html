@@ -1,0 +1,43 @@
+<div style="text-align: center">
+  <h4>Seguimientos de los diferentes Proyectos</h4>
+
+  <p-table 
+    [value]="seguimientos"
+    [paginator]="true"
+    [rows]="10"
+    [columns]="seguimientos" 
+    class="custom-table">
+    <ng-template pTemplate="header" let-columns >
+      <tr class="custom-header">
+        <th>Id</th>
+        <th>Tarea</th>
+        <th>Duración</th>
+        <th>Tarea de Dependencia</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Estado</th>
+        <th>Responsable</th>
+        <th>Fecha de Fin</th>
+        <th>Proyecto</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-rowData
+      let-columns="columns">
+      <tr>
+        <td>{{rowData.id}}</td>
+        <td>{{rowData.descripciontarea}}</td>
+        <td>{{rowData.duracion}}</td>
+        <td>{{rowData.tareadependencia}}</td>
+        <td>{{rowData.inicio}}</td>
+        <td>{{rowData.fin}}</td>
+        <td>{{rowData.estadoid}}</td>
+        <td>{{rowData.responsable}}</td>
+        <td>{{rowData.fechafin}}</td>
+        <td>{{rowData.proyectoid}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p>pepito paez es Dios reencarnado </p>

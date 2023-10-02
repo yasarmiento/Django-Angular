@@ -1,0 +1,39 @@
+<p>
+    
+</p>
+<div class="card-container">
+    <div class="card flex justify-content-center">
+        <p-card header="Archivos">
+            <div style="text-align: center">
+                <p-table 
+                  [value]="archivos"
+                  [paginator]="true"
+                  [rows]="10"
+                  [columns]="archivos"
+                  class="custom-table">
+                  <ng-template pTemplate="header" let-columns >
+                    <tr class="custom-header">
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Archivo</th>
+                      <th>Proyecto</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template
+                    pTemplate="body"
+                    let-rowData
+                    let-columns="columns">
+                    <tr>
+                      <td>{{rowData.id}}</td>     
+                      <td>{{rowData.nombre_archivo_id}}</td>   
+                      <td><a href="{{rowData.archivo}}" target="_blank">{{rowData.archivo}}</a></td>
+                      <td>{{rowData.proyectoid}}</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+        </p-card>
+    </div>
+</div>
+
+

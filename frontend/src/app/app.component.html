@@ -1,0 +1,12 @@
+
+<p-sidebar [(visible)]="sidebarVisible">
+  <p-menubar [model]="items"></p-menubar>
+</p-sidebar>
+
+<p-button (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+
