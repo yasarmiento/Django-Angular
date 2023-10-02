@@ -1,16 +1,10 @@
-export class Proyectos {
-    id?: any;
-    proyecto?: string;
-    plazo?: string;
-    operador?: boolean;
-    fechai?: string;
-    fechaf?: string;
-    convocatoriaid?: boolean;
-    roluniversidadid?: string;
-    operadorid?: string;
-    entidadfinanciadoraid?: boolean;
-    grupoinvestigacionid?: string;
-    usuarioid?: string;
+export interface ProyectosI {
+    id? : number;
+    proyecto : string;
+    codigo : string;
+    plazo : number;
+    fechai : Date;
+    fechaf : Date;
 }
 
 export class Convocatoria {

@@ -1,1 +1,26 @@
-<p>operador works!</p>
+<div style="text-align: center">
+    <h4>Listado de Operadores</h4>
+  
+    <p-table 
+      [value]="operadores"
+      [paginator]="true"
+      [rows]="10"
+      [columns]="operadores"
+      class="custom-table">
+      <ng-template pTemplate="header" let-columns >
+        <tr class="custom-header">
+          <th>Id</th>
+          <th>Operador</th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-rowData
+        let-columns="columns">
+        <tr>
+          <td>{{rowData.id}}</td>        
+          <td>{{rowData.operador}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>

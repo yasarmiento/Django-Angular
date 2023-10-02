@@ -5,6 +5,7 @@ import { ProyectosformComponent } from './components/proyectosform/proyectosform
 import { SeguimientosComponent } from './components/seguimientos/seguimientos.component'
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ArchivoComponent } from './components/archivo/archivo.component';
+import { OperadorComponent } from './components/operador/operador.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'proyectos', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'seguimientos', component: SeguimientosComponent },
   { path: 'usuarios', component: UsuariosComponent },
   { path: 'archivos', component: ArchivoComponent },
+  { path: 'operador', component: OperadorComponent },
 
 ];
 

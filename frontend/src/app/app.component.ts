@@ -32,7 +32,11 @@ export class AppComponent {
           {
               label: 'Usuarios',
               routerLink: ['/usuarios']
-          }
+          },
+          {
+            label: 'Operador',
+            routerLink: ['/operador']
+        }
       ];
   }
 
