@@ -1,6 +1,5 @@
 /* Estilo de la tabla */
 .custom-table {
-    width: 100%; /* La tabla ocupa todo el ancho del contenedor */
     border-collapse: collapse; /* Fusiona los bordes de las celdas */
   }
   

@@ -27,7 +27,7 @@
                       <td>{{rowData.id}}</td>     
                       <td>{{rowData.operador}}</td>   
                       <td>
-                        <button class="btn btn-primary">Actualizar</button>
+                        <a [routerLink]="'/operadores/' + rowData.id" class="btn btn-primary">Acciones</a>
                       </td>
                     </tr>
                   </ng-template>

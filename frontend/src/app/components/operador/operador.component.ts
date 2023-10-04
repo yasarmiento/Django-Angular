@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { OperadoresI } from 'src/app/models/operadores.model';
 import { OperadorService } from 'src/app/services/operador.service';
 
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-operador',

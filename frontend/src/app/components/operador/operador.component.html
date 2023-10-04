@@ -1,13 +1,13 @@
 <div *ngIf="viewMode; else editable">
     <div *ngIf="currentOperadoresI.id">
-      <h4>Tutorial</h4>
+      <h4>Operador</h4>
       <div>
         <label><strong>Operador:</strong></label> {{ currentOperadoresI.operador }}
       </div>
   
       <a
         class="badge badge-warning"
-        routerLink="/tutorials/{{ currentOperadoresI.id }}"
+        routerLink="/operadores/{{ currentOperadoresI.id }}"
       >
         Edit
       </a>
@@ -21,10 +21,9 @@
   
   <ng-template #editable>
     <div *ngIf="currentOperadoresI.id" class="edit-form">
-      <h4>Tutorial</h4>
+      <h4>Operador</h4>
       <form>
         <div class="form-group">
-          <label for="title">Title</label>
           <input
             type="text"
             class="form-control"
@@ -35,7 +34,7 @@
         </div>
 
       </form>
-      <button class="btn btn-danger mr-2" (click)="deleteOperador()">
+      <button class="btn btn-danger mt-2 mr-2" (click)="deleteOperador()">
         Eliminar
       </button>
   
@@ -52,6 +51,6 @@
   
     <div *ngIf="!currentOperadoresI.id">
       <br />
-      <p>Cannot access this Tutorial...</p>
+      <p>Este Operador no Existe...</p>
     </div>
   </ng-template>
