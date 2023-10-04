@@ -53,7 +53,7 @@ export class OperadorComponent implements OnInit{
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.message = res.message ? res.message : 'This operador was updated successfully!';
+          this.router.navigate(['/operadorform']);
         },
         error: (e) => console.error(e)
       });
@@ -64,7 +64,7 @@ export class OperadorComponent implements OnInit{
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.router.navigate(['/operador']);
+          this.router.navigate(['/operadorform']);
         },
         error: (e) => console.error(e)
       });

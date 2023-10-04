@@ -2,7 +2,7 @@
     <div class="submit-form">
       <div *ngIf="!submitted">
         <div class="form-group">
-          <label for="title">Title</label>
+          <label for="title">Nombre del Operador</label>
           <input
             type="text"
             class="form-control"
@@ -12,20 +12,8 @@
             name="title"
           />
         </div>
-        <!--
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            class="form-control"
-            id="description"
-            required
-            [(ngModel)]="tutorial.description"
-            name="description"
-          />
-        </div>
-        -->
-        <button (click)="saveOperador()" class="btn btn-success">Agregar</button>
-        <button class="btn btn-danger" [routerLink]="['/operadorform']">Cancelar</button>
+        <button (click)="saveOperador()" class="btn btn-success mt-2 mr-2">Agregar</button>
+        <button class="btn btn-danger mt-2" [routerLink]="['/operadorform']">Cancelar</button>
       </div>
   
       <div *ngIf="submitted">
