@@ -10,15 +10,15 @@ class SeguimientosSerializer(serializers.ModelSerializer):
             'id',
             'descripciontarea',
             'duracion',
-            'tareadependencia',
+            'tarea_anterior',
             'diasdependencia',
+            'tipodependenciaid',
             'inicio',
             'fin',
             'estadoid',
             'responsable',
             'fechafin',
             'pasosid',
-            'tarea_anterior',
             'proyectoid',
         ]
 

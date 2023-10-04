@@ -26,8 +26,8 @@ class Pasos (models.Model):
 class Seguimientos (models.Model):
     descripciontarea = models.CharField(max_length=150)
     duracion = models.IntegerField()
-    tareadependencia = models.CharField(max_length=40, null=True, blank=True)
-    diasdependencia = models.IntegerField()
+    tarea_anterior = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
+    diasdependencia = models.IntegerField(blank=True, null=True)
     tipodependenciaid = models.ForeignKey(Tipodependencia, on_delete=models.CASCADE, null=True, blank=True)
     inicio = models.DateField()
     fin = models.DateField()
@@ -35,7 +35,6 @@ class Seguimientos (models.Model):
     fechafin = models.DateField()
     estadoid = models.ForeignKey(Estado, on_delete=models.CASCADE, null=True, blank=True)
     pasosid = models.ForeignKey(Pasos, on_delete=models.CASCADE)
-    tarea_anterior = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
     proyectoid = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
 
     def __str__(self):
