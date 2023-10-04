@@ -24,6 +24,9 @@ import { TipoarchivoComponent } from './components/tipoarchivo/tipoarchivo.compo
 import { GrupoinvestigacionComponent } from './components/grupoinvestigacion/grupoinvestigacion.component';
 import { ArchivoComponent } from './components/archivo/archivo.component';
 import { ProyectosformComponent } from './components/proyectosform/proyectosform.component';
+import { ProyectosaddComponent } from './components/proyectosadd/proyectosadd.component';
+import { OperadoraddComponent } from './components/operadoradd/operadoradd.component';
+import { OperadorformComponent } from './components/operadorform/operadorform.component';
 
 
 
@@ -40,6 +43,9 @@ import { ProyectosformComponent } from './components/proyectosform/proyectosform
     GrupoinvestigacionComponent,
     ArchivoComponent,
     ProyectosformComponent,
+    ProyectosaddComponent,
+    OperadoraddComponent,
+    OperadorformComponent,
   ],
   imports: [
     BrowserModule,

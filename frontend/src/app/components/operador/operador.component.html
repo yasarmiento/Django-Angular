@@ -1,26 +1,58 @@
-<div style="text-align: center">
-    <h4>Listado de Operadores</h4>
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentOperadoresI.id">
+      <h4>Tutorial</h4>
+      <div>
+        <label><strong>Operador:</strong></label> {{ currentOperadoresI.operador }}
+      </div>
   
-    <p-table 
-      [value]="operadores"
-      [paginator]="true"
-      [rows]="10"
-      [columns]="operadores"
-      class="custom-table">
-      <ng-template pTemplate="header" let-columns >
-        <tr class="custom-header">
-          <th>Id</th>
-          <th>Operador</th>
-        </tr>
-      </ng-template>
-      <ng-template
-        pTemplate="body"
-        let-rowData
-        let-columns="columns">
-        <tr>
-          <td>{{rowData.id}}</td>        
-          <td>{{rowData.operador}}</td>
-        </tr>
-      </ng-template>
-    </p-table>
+      <a
+        class="badge badge-warning"
+        routerLink="/tutorials/{{ currentOperadoresI.id }}"
+      >
+        Edit
+      </a>
+    </div>
+  
+    <div *ngIf="!currentOperadoresI">
+      <br />
+      <p>Please click on a Operador...</p>
+    </div>
   </div>
+  
+  <ng-template #editable>
+    <div *ngIf="currentOperadoresI.id" class="edit-form">
+      <h4>Tutorial</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentOperadoresI.operador"
+            name="title"
+          />
+        </div>
+
+      </form>
+      <button class="btn btn-danger mr-2" (click)="deleteOperador()">
+        Eliminar
+      </button>
+  
+      <button
+        type="submit"
+        class="btn btn-primary mr-2 mt-2"
+        (click)="updateOperador()"
+      >
+        Actualizar
+      </button>
+      <button  type="submit" class="btn btn-danger mt-2" (click)="updateOperador" [routerLink]="['/operadorform']" >Actualizar </button>
+
+      <p>{{ message }}</p>
+    </div>
+  
+    <div *ngIf="!currentOperadoresI.id">
+      <br />
+      <p>Cannot access this Tutorial...</p>
+    </div>
+  </ng-template>

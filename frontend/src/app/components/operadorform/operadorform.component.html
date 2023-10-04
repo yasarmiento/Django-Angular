@@ -1,0 +1,28 @@
+<div class="list row">
+    <div class="col-md-6">
+      <h4>Tutorials List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let tutorial of operadores; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveOperadores(tutorial, i)"
+        >
+          {{ tutorial.operador }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <app-operador 
+      [viewMode]="true"
+      [currentOperadoresI]="currentOperadoresI">
+      </app-operador>
+    </div>
+
+  </div>
+
+  <div>
+    <p-button class="btn btn-primary" [routerLink]="['/operadoradd']">
+      Agregar Nuevo Operador
+    </p-button>
+  </div>

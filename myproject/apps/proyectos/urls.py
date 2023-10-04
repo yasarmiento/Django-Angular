@@ -5,7 +5,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.ProyectoListView.as_view(), name='proyecto-list'),
-    path('proyectos/<int:pk>', views.ConvocatoriaDetailView.as_view(), name='proyecto-detail'),
+    path('proyectos/<int:pk>', views.ProyectoDetailView.as_view(), name='proyecto-detail'),
 
     # URLs para la tabla Convocatoria
     path('convocatorias', views.ConvocatoriaListCreateView.as_view(), name='convocatoria-list-create'),

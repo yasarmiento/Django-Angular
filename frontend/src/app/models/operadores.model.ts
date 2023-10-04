@@ -1,4 +1,4 @@
 export interface OperadoresI {
-    id? : number;
-    operador : string;
+    id? : any;
+    operador?: string;
 }

@@ -6,15 +6,15 @@
   
   /* Estilo de las celdas del encabezado */
   .custom-table th {
-    background-color: #d68c1d;
-    color: #ffffff;
+    background-color: #f0af2b;
+    color: #42bdcc;
     text-align: left;
     padding: 10px;
-    border: 1px solid #b6aeae;
+    border: 1px solid #e44d3f;
   }
   
   /* Estilo de las celdas de datos */
   .custom-table td {
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #e44d3f;
   }

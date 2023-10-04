@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OperadoresI } from 'src/app/models/operadores.model';
 import { OperadorService } from 'src/app/services/operador.service';
 
@@ -10,24 +10,65 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './operador.component.html',
   styleUrls: ['./operador.component.css']
 })
-export class OperadorComponent {
+export class OperadorComponent implements OnInit{
+
+  @Input() viewMode = false;
+
+  @Input() currentOperadoresI: OperadoresI = {
+    operador: '',
+  };
+
+  message = '';
+
   operadores : any;
 
   constructor (
-    private operadoresServices: OperadorService,
+    private operadorService: OperadorService,
+    private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient,
   ) { }
 
   ngOnInit(): void {
-    this.mostrarOperadores()
+    if (!this.viewMode) {
+      this.message = '';
+      this.getOperador(this.route.snapshot.params["id"]);
+    }
   }
-  mostrarOperadores() {
-    this.http.get("http://127.0.0.1:8000/operadores")
-      .subscribe(
-        operador => {
-          this.operadores = operador;
-        }
-      );
+
+  getOperador(id: string): void {
+    this.operadorService.get(id)
+      .subscribe({
+        next: (data) => {
+          this.currentOperadoresI = data;
+          console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  updateOperador(): void {
+    this.message = '';
+
+    this.operadorService.update(this.currentOperadoresI.id, this.currentOperadoresI)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.message = res.message ? res.message : 'This operador was updated successfully!';
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  deleteOperador(): void {
+    this.operadorService.delete(this.currentOperadoresI.id)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.router.navigate(['/operador']);
+        },
+        error: (e) => console.error(e)
+      });
   }
 }
+  
+

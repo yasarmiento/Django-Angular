@@ -35,8 +35,18 @@ export class AppComponent {
           },
           {
             label: 'Operador',
-            routerLink: ['/operador']
-        }
+            routerLink: ['/operador'],
+            items: [
+              {
+                label: 'Agregar Operador',
+                routerLink: ["/operadoradd"],
+              },
+              {
+                label: 'Ver listado de Operadores',
+                routerLink: ["/operadorform"],
+              }
+            ]
+          }
       ];
   }
 
