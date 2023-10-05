@@ -33,8 +33,4 @@ export class EntidadfService {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
-  findByOperadores(operadores: any): Observable<OperadoresI[]> {
-    return this.http.get<OperadoresI[]>(`${baseUrl}?operador=${operadores}`);
-  }
-
 }

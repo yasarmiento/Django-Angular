@@ -21,7 +21,7 @@ urlpatterns = [
 
     # URLs para la tabla EntidadFinanciadora
     path('entidades_financiadoras', views.EntidadFinanciadoraListCreateView.as_view(), name='entidad-financiadora-list-create'),
-    path('entidades_financiadoras/<int:pk>/', views.EntidadFinanciadoraDetailView.as_view(), name='entidad-financiadora-detail'),
+    path('entidades_financiadoras/<int:pk>', views.EntidadFinanciadoraDetailView.as_view(), name='entidad-financiadora-detail'),
 
     # URLs para la tabla Tipoarchivo
     path('tipos_archivo', views.TipoarchivoListCreateView.as_view(), name='tipo-archivo-list-create'),

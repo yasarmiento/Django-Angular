@@ -1,1 +1,63 @@
-<p>entidadfinanciadora works!</p>
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentEntidadFI.id">
+      <h4>Entidad Financiadora</h4>
+      <div>
+        <label><strong>Entidad Financiadora:</strong></label> {{ currentEntidadFI.entidadfinanciadora }}
+      </div>
+  
+      <a
+        class="badge badge-warning"
+        routerLink="/entidadf/{{ currentEntidadFI.id }}"
+      >
+        Edit
+      </a>
+    </div>
+  
+    <div *ngIf="!currentEntidadFI">
+      <br />
+      <p>Please click on a Entidad Financiera...</p>
+    </div>
+  </div>
+  
+  <ng-template #editable>
+    <div class="card-container m-2">
+      <div class="card flex justify-content-center">
+          <p-card header="Entidad Financiadora">
+            <div *ngIf="currentEntidadFI.id" class="edit-form">
+              <form>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    [(ngModel)]="currentEntidadFI.entidadfinanciadora"
+                    name="title"
+                  />
+                </div>
+        
+              </form>
+              <button class="btn btn-danger m-2" (click)="deleteEntidadf()">
+                Eliminar
+              </button>
+          
+              <button
+                type="submit"
+                class="btn btn-primary m-2"
+                (click)="updateEntidadf()"
+              >
+                Actualizar
+              </button>
+            
+              <p>{{ message }}</p>
+            </div>
+          </p-card>
+      </div>
+    </div>
+    
+    
+  
+    <div *ngIf="!currentEntidadFI.id">
+      <br />
+      <p>Esta Entidad no Existe...</p>
+    </div>
+  </ng-template>
