@@ -33,6 +33,8 @@ import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.compo
 import { EntidadfformComponent } from './components/entidadfform/entidadfform.component';
 import { RolUaddComponent } from './components/rol-uadd/rol-uadd.component';
 import { RolUformComponent } from './components/rol-uform/rol-uform.component';
+import { TipoarchivoaddComponent } from './components/tipoarchivoadd/tipoarchivoadd.component';
+import { TipoarchivoformComponent } from './components/tipoarchivoform/tipoarchivoform.component';
 
 
 
@@ -58,6 +60,8 @@ import { RolUformComponent } from './components/rol-uform/rol-uform.component';
     EntidadfformComponent,
     RolUaddComponent,
     RolUformComponent,
+    TipoarchivoaddComponent,
+    TipoarchivoformComponent,
   ],
   imports: [
     BrowserModule,

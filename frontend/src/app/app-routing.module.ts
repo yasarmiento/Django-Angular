@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProyectosComponent } from './components/proyectos/proyectos.component'
 import { ProyectosformComponent } from './components/proyectosform/proyectosform.component'
@@ -15,6 +15,11 @@ import { EntidadfinanciadoraComponent } from './components/entidadfinanciadora/e
 import { RolUComponent } from './components/rol-u/rol-u.component';
 import { RolUaddComponent } from './components/rol-uadd/rol-uadd.component';
 import { RolUformComponent } from './components/rol-uform/rol-uform.component';
+import { TipoarchivoComponent } from './components/tipoarchivo/tipoarchivo.component';
+import { TipoarchivoI } from './models/tipoarchivo.model';
+import { TipoarchivoformComponent } from './components/tipoarchivoform/tipoarchivoform.component';
+import { TipoarchivoaddComponent } from './components/tipoarchivoadd/tipoarchivoadd.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'proyectos', pathMatch: 'full' },
@@ -32,7 +37,12 @@ const routes: Routes = [
   { path: 'entidadfform', component: EntidadfformComponent },
   { path: 'rolu/:id', component: RolUComponent},
   { path: 'roluform', component: RolUformComponent},
-  { path: 'roluadd', component: RolUaddComponent}
+  { path: 'roluadd', component: RolUaddComponent},
+  { path: 'tipoarchivoform', component: TipoarchivoformComponent},
+  { path: 'tipoarchivo/:id', component: TipoarchivoComponent},
+  { path: 'tipoarchivoadd', component: TipoarchivoaddComponent,}
+
+
 ];
 
 @NgModule({

@@ -1,0 +1,38 @@
+
+<div class="card-container m-2">
+    <div class="card flex justify-content-center">
+        <p-card header="Tipos de Archivos">
+          <button class="btn btn-primary" [routerLink]="['/tipoarchivoadd']">
+            Agregar Nuevo Tipo de Archivo
+          </button>
+            <div style="text-align: center" class="mt-2">
+                <p-table 
+                  [value]="tiposarchivos"
+                  [paginator]="true"
+                  [rows]="10"
+                  [columns]="tiposarchivos"
+                  class="custom-table">
+                  <ng-template pTemplate="header" let-columns >
+                    <tr class="custom-header">
+                      <th>Id</th>
+                      <th>Tipo de Archivo</th>
+                      <th>Revisar</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template
+                    pTemplate="body"
+                    let-rowData
+                    let-columns="columns">
+                    <tr>
+                      <td>{{rowData.id}}</td>     
+                      <td>{{rowData.nombre_archivo}}</td>   
+                      <td>
+                        <a [routerLink]="'/tipoarchivo/' + rowData.id" class="btn btn-primary">Acciones</a>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+        </p-card>
+    </div>
+</div>

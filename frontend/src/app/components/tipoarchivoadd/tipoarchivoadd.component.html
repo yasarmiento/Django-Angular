@@ -1,0 +1,30 @@
+<div class="card-container m-2">
+    <div class="card flex justify-content-center">
+        <p-card header="Agregar un Nuevo Tipo de Archivo">
+          <div>
+            <div class="submit-form">
+              <div *ngIf="!submitted">
+                <div class="form-group">
+                  <label for="title">Tipo de Archivo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    required
+                    [(ngModel)]="tiposarchivos.nombre_archivo"
+                    name="title"
+                  />
+                </div>
+                <button (click)="saveTipoarchivo()" class="btn btn-success m-2">Agregar</button>
+                <button class="btn btn-danger m-2" [routerLink]="['/tipoarchivoform']">Cancelar</button>
+              </div>
+          
+              <div *ngIf="submitted">
+                <h4>Tutorial was submitted successfully!</h4>
+                <button class="btn btn-success" (click)="newTipoarchivo()">Add</button>
+              </div>
+            </div>
+          </div>
+        </p-card>
+    </div>
+  </div>

@@ -55,12 +55,24 @@ export class AppComponent {
           },
           {
             label: 'Roles de la Universidad',
+            routerLink: ["/roluform"],
             items:[
               {
-                label: 'Agregar Rol'
+                label: 'Agregar Rol',
+                routerLink: ["/roluadd"],
               }
             ]
-          }
+          },
+          {
+            label: 'Tipos de Archivos',
+            routerLink: ['/tipoarchivoform'],
+            items: [
+              {
+                label: 'Agregar un tipo de archivo',
+                routerLink: ["/tipoarchivoadd"],
+              },
+            ]
+          },
       ];
   }
 
