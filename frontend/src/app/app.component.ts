@@ -52,6 +52,14 @@ export class AppComponent {
                 routerLink: ["/entidadfadd"],
               },
             ]
+          },
+          {
+            label: 'Roles de la Universidad',
+            items:[
+              {
+                label: 'Agregar Rol'
+              }
+            ]
           }
       ];
   }

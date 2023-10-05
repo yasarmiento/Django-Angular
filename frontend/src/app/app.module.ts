@@ -31,6 +31,8 @@ import { UsuariosformComponent } from './components/usuariosform/usuariosform.co
 import { UsuariosaddComponent } from './components/usuariosadd/usuariosadd.component';
 import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.component';
 import { EntidadfformComponent } from './components/entidadfform/entidadfform.component';
+import { RolUaddComponent } from './components/rol-uadd/rol-uadd.component';
+import { RolUformComponent } from './components/rol-uform/rol-uform.component';
 
 
 
@@ -54,6 +56,8 @@ import { EntidadfformComponent } from './components/entidadfform/entidadfform.co
     UsuariosaddComponent,
     EntidadfaddComponent,
     EntidadfformComponent,
+    RolUaddComponent,
+    RolUformComponent,
   ],
   imports: [
     BrowserModule,

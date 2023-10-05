@@ -1,1 +1,63 @@
-<p>rol-u works!</p>
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentRolUI.id">
+      <h4>Rol Universidad</h4>
+      <div>
+        <label><strong>Rol Universidad:</strong></label> {{ currentRolUI.rolU }}
+      </div>
+  
+      <a
+        class="badge badge-warning"
+        routerLink="/rolu/{{ currentRolUI.id }}"
+      >
+        Edit
+      </a>
+    </div>
+  
+    <div *ngIf="!currentRolUI">
+      <br />
+      <p>Please click on a Rol University...</p>
+    </div>
+  </div>
+  
+  <ng-template #editable>
+    <div class="card-container m-2">
+      <div class="card flex justify-content-center">
+          <p-card header="Roles de la Universidad">
+            <div *ngIf="currentRolUI.id" class="edit-form">
+              <form>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    [(ngModel)]="currentRolUI.rolU"
+                    name="title"
+                  />
+                </div>
+        
+              </form>
+              <button class="btn btn-danger m-2" (click)="deleteRolU()">
+                Eliminar
+              </button>
+          
+              <button
+                type="submit"
+                class="btn btn-primary m-2"
+                (click)="updateRolU()"
+              >
+                Actualizar
+              </button>
+            
+              <p>{{ message }}</p>
+            </div>
+          </p-card>
+      </div>
+    </div>
+    
+    
+  
+    <div *ngIf="!currentRolUI.id">
+      <br />
+      <h1><strong>Esta Rol no Existe...</strong></h1>
+    </div>
+  </ng-template>

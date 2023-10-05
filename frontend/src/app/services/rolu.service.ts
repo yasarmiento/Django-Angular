@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EntidadFinanciadoraI } from '../models/entidadf.model';
+import { RolUI } from '../models/rol-u.model';
 
-const baseUrl = 'http://127.0.0.1:8000/entidades_financiadoras'
+const baseUrl = 'http://127.0.0.1:8000/roles_universidad'
 @Injectable({
   providedIn: 'root'
 })
-export class EntidadfService {
+export class RoluService {
 
   constructor(private http:HttpClient) { }
 
-  getAll(): Observable<EntidadFinanciadoraI[]>{
-    return this.http.get<EntidadFinanciadoraI[]>(baseUrl);
+  getAll(): Observable<RolUI[]>{
+    return this.http.get<RolUI[]>(baseUrl);
   }
 
-  get(id: any): Observable<EntidadFinanciadoraI> {
-    return this.http.get<EntidadFinanciadoraI>(`${baseUrl}/${id}`);
+  get(id: any): Observable<RolUI> {
+    return this.http.get<RolUI>(`${baseUrl}/${id}`);
   }
   
 
