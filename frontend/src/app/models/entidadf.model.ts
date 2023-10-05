@@ -1,4 +1,4 @@
 export interface EntidadFinanciadoraI {
-    id? : number;
-    operador : string;
+    id? : any;
+    entidadfinanciadora : string;
 }

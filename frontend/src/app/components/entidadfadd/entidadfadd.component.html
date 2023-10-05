@@ -1,0 +1,30 @@
+<div class="card-container m-2">
+  <div class="card flex justify-content-center">
+      <p-card header="Agregar una Nueva Entidad">
+        <div>
+          <div class="submit-form">
+            <div *ngIf="!submitted">
+              <div class="form-group">
+                <label for="title">Nombre de la Entidad Financiadora</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  required
+                  [(ngModel)]="entidadf.entidadfinanciadora"
+                  name="title"
+                />
+              </div>
+              <button (click)="saveEntidadf()" class="btn btn-success mt-2 mr-2">Agregar</button>
+              <button class="btn btn-danger mt-2" [routerLink]="['/entidadfform']">Cancelar</button>
+            </div>
+        
+            <div *ngIf="submitted">
+              <h4>Tutorial was submitted successfully!</h4>
+              <button class="btn btn-success" (click)="newEntidadf()">Add</button>
+            </div>
+          </div>
+        </div>
+      </p-card>
+  </div>
+</div>

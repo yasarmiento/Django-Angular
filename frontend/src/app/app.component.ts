@@ -42,6 +42,16 @@ export class AppComponent {
                 routerLink: ["/operadoradd"],
               },
             ]
+          },
+          {
+            label: 'Entidades Financiadoras',
+            routerLink: ['/entidadfform'],
+            items: [
+              {
+                label: 'Agregar Entidad Financiadora',
+                routerLink: ["/entidadfadd"],
+              },
+            ]
           }
       ];
   }

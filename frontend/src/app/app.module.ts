@@ -27,6 +27,10 @@ import { ProyectosformComponent } from './components/proyectosform/proyectosform
 import { ProyectosaddComponent } from './components/proyectosadd/proyectosadd.component';
 import { OperadoraddComponent } from './components/operadoradd/operadoradd.component';
 import { OperadorformComponent } from './components/operadorform/operadorform.component';
+import { UsuariosformComponent } from './components/usuariosform/usuariosform.component';
+import { UsuariosaddComponent } from './components/usuariosadd/usuariosadd.component';
+import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.component';
+import { EntidadfformComponent } from './components/entidadfform/entidadfform.component';
 
 
 
@@ -46,6 +50,10 @@ import { OperadorformComponent } from './components/operadorform/operadorform.co
     ProyectosaddComponent,
     OperadoraddComponent,
     OperadorformComponent,
+    UsuariosformComponent,
+    UsuariosaddComponent,
+    EntidadfaddComponent,
+    EntidadfformComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,9 @@ import { ArchivoComponent } from './components/archivo/archivo.component';
 import { OperadorComponent } from './components/operador/operador.component';
 import { OperadoraddComponent } from './components/operadoradd/operadoradd.component';
 import { OperadorformComponent } from './components/operadorform/operadorform.component';
+import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.component';
+import { EntidadfformComponent } from './components/entidadfform/entidadfform.component';
+import { EntidadfinanciadoraComponent } from './components/entidadfinanciadora/entidadfinanciadora.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'proyectos', pathMatch: 'full' },
@@ -21,6 +24,9 @@ const routes: Routes = [
   { path: 'operadores/:id', component: OperadorComponent },
   { path: 'operadoradd', component: OperadoraddComponent },
   { path: 'operadorform', component: OperadorformComponent },
+  { path: 'entidadf/:id', component: EntidadfinanciadoraComponent },
+  { path: 'entidadfadd', component: EntidadfaddComponent },
+  { path: 'entidadfform', component: EntidadfformComponent },
 
 ];
 
