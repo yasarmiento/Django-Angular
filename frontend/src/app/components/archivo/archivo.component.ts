@@ -14,8 +14,8 @@ export class ArchivoComponent {
   ngOnInit() {
     this.http.get("http://127.0.0.1:8000/archivos")
       .subscribe(
-        proyecto => {
-          this.archivos = proyecto;
+        pepito => {
+          this.archivos = pepito;
         }
       );
   }
