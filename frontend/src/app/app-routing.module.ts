@@ -16,9 +16,10 @@ import { RolUComponent } from './components/rol-u/rol-u.component';
 import { RolUaddComponent } from './components/rol-uadd/rol-uadd.component';
 import { RolUformComponent } from './components/rol-uform/rol-uform.component';
 import { TipoarchivoComponent } from './components/tipoarchivo/tipoarchivo.component';
-import { TipoarchivoI } from './models/tipoarchivo.model';
 import { TipoarchivoformComponent } from './components/tipoarchivoform/tipoarchivoform.component';
 import { TipoarchivoaddComponent } from './components/tipoarchivoadd/tipoarchivoadd.component';
+import { ArchivoaddComponent } from './components/archivoadd/archivoadd.component';
+import { ArchivoformComponent } from './components/archivoform/ArchivoformComponent';
 
 
 const routes: Routes = [
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'proyectosadd', component: ProyectosaddComponent },
   { path: 'seguimientos', component: SeguimientosComponent },
   { path: 'usuarios', component: UsuariosComponent },
-  { path: 'archivos', component: ArchivoComponent },
+  { path: 'archivos/:id', component: ArchivoComponent },
   { path: 'operadores/:id', component: OperadorComponent },
   { path: 'operadoradd', component: OperadoraddComponent },
   { path: 'operadorform', component: OperadorformComponent },
@@ -40,8 +41,9 @@ const routes: Routes = [
   { path: 'roluadd', component: RolUaddComponent},
   { path: 'tipoarchivoform', component: TipoarchivoformComponent},
   { path: 'tipoarchivo/:id', component: TipoarchivoComponent},
-  { path: 'tipoarchivoadd', component: TipoarchivoaddComponent,}
-
+  { path: 'tipoarchivoadd', component: TipoarchivoaddComponent},
+  { path: 'archivoform', component: ArchivoformComponent},
+  { path: 'archivoadd', component: ArchivoaddComponent},
 
 ];
 

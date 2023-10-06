@@ -1,37 +1,68 @@
-
-<div class="card-container m-2">
-    <div class="card flex justify-content-center">
-        <p-card header="Archivos">
-            <div style="text-align: center">
-                <p-table 
-                  [value]="archivos"
-                  [paginator]="true"
-                  [rows]="10"
-                  [columns]="archivos"
-                  class="custom-table">
-                  <ng-template pTemplate="header" let-columns >
-                    <tr class="custom-header">
-                      <th>Id</th>
-                      <th>Name</th>
-                      <th>Archivo</th>
-                      <th>Proyecto</th>
-                    </tr>
-                  </ng-template>
-                  <ng-template
-                    pTemplate="body"
-                    let-rowData
-                    let-columns="columns">
-                    <tr>
-                      <td>{{rowData.id}}</td>     
-                      <td>{{rowData.nombre_archivo_id}}</td>   
-                      <td><a href="{{rowData.archivo}}" target="_blank">{{rowData.archivo}}</a></td>
-                      <td>{{rowData.proyectoid}}</td>
-                    </tr>
-                  </ng-template>
-                </p-table>
-              </div>
-        </p-card>
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentArchivoI.id">
+    <h4>Tipo de Archivo</h4>
+    <div>
+      <label><strong>Tipo de Archivo:</strong></label> {{ currentArchivoI.nombre_archivo_id }}
     </div>
+
+    <a
+      class="badge badge-warning"
+      routerLink="/tipoarchivo/{{ currentArchivoI.id }}"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentArchivoI">
+    <br />
+    <p>Please click on a Archive Name...</p>
+  </div>
 </div>
 
+<ng-template #editable>
+  <div class="card-container m-2">
+    <div class="card flex justify-content-center">
+        <p-card header="Tipo de Archivo">
 
+          <div *ngIf="currentArchivoI.id" class="edit-form">
+            <form>
+              <div class="form-group">
+                <select class="form-control" id="title" [(ngModel)]="currentArchivoI.nombre_archivo_id" name="title">
+                  <option *ngFor="let nombreArchivo of nombre_archivo" [value]="nombreArchivo.id">{{ nombreArchivo.nombre_archivo }}</option>
+                </select>
+                <input type="file" class="form-control" id="title" [(ngModel)]="currentArchivoI.archivo" name="title"/>
+                <select class="form-control" id="title" [(ngModel)]="currentArchivoI.proyectoid" name="title">
+                  <option *ngFor="let proyecto of proyecto" [value]="proyecto.id">{{ proyecto.proyecto }}</option>
+                </select>
+              </div>
+      
+            </form>
+            <button class="btn btn-danger m-2" (click)="deleteArchivo()">
+              Eliminar
+            </button>
+        
+            <button
+              type="submit"
+              class="btn btn-primary m-2"
+              (click)="updateArchivo()"
+            >
+              Actualizar
+            </button>
+            <button class="btn btn-success m-2" [routerLink]="['/archivoform']">Cancelar</button>
+            
+            <p>{{ message }}</p>
+          </div>
+        </p-card>
+    </div>
+  </div>
+  
+  
+
+  <div *ngIf="!currentArchivoI.id">
+    <br />
+    
+    <h1><strong>Este Tipo de Archivo no existe...</strong></h1>
+    <button class="btn btn-primary m-2" [routerLink]="['/archivoadd']">Agregar uno Nuevo</button>
+
+  </div>
+</ng-template>

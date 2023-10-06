@@ -35,6 +35,8 @@ import { RolUaddComponent } from './components/rol-uadd/rol-uadd.component';
 import { RolUformComponent } from './components/rol-uform/rol-uform.component';
 import { TipoarchivoaddComponent } from './components/tipoarchivoadd/tipoarchivoadd.component';
 import { TipoarchivoformComponent } from './components/tipoarchivoform/tipoarchivoform.component';
+import { ArchivoaddComponent } from './components/archivoadd/archivoadd.component';
+import { ArchivoformComponent } from './components/archivoform/ArchivoformComponent';
 
 
 
@@ -62,6 +64,8 @@ import { TipoarchivoformComponent } from './components/tipoarchivoform/tipoarchi
     RolUformComponent,
     TipoarchivoaddComponent,
     TipoarchivoformComponent,
+    ArchivoaddComponent,
+    ArchivoformComponent,
   ],
   imports: [
     BrowserModule,

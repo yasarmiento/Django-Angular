@@ -1,20 +1,20 @@
 /* Estilo de la tabla */
 .custom-table {
-    width: 100%; /* La tabla ocupa todo el ancho del contenedor */
     border-collapse: collapse; /* Fusiona los bordes de las celdas */
   }
   
   /* Estilo de las celdas del encabezado */
   .custom-table th {
-    background-color: #d68c1d;
+    background-color: #f0af2b;
     color: #ffffff;
     text-align: center;
-    padding: 5px;
-    border: 1px solid #b6aeae;
+    padding: 10px;
+    border: 1px solid #e44d3f;
   }
   
   /* Estilo de las celdas de datos */
   .custom-table td {
+    text-align: center;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #e44d3f;
   }
