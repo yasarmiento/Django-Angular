@@ -28,7 +28,7 @@
             <form>
               <div class="form-group">
                 <select class="form-control" id="title" [(ngModel)]="currentArchivoI.nombre_archivo_id" name="title">
-                  <option *ngFor="let nombreArchivo of nombre_archivo" [value]="nombreArchivo.id">{{ nombreArchivo.nombre_archivo }}</option>
+                  <option *ngFor="let nombreArchivo of nombresArchivos" [value]="nombreArchivo.id">{{ nombreArchivo.nombre_archivo }}</option>
                 </select>
                 <input type="file" class="form-control" id="title" [(ngModel)]="currentArchivoI.archivo" name="title"/>
                 <select class="form-control" id="title" [(ngModel)]="currentArchivoI.proyectoid" name="title">

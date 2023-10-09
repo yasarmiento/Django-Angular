@@ -53,8 +53,12 @@ class Proyecto (models.Model):
     def __str__(self):
         return self.proyecto
 
-class Archivo (models.Model):
-    archivo = models.FileField()
+def archivo_upload_path(instance, filename):
+    # Define la carpeta y el nombre del archivo
+    return f'archivos/{instance.nombre_archivo_id}/{filename}'
+
+class Archivo(models.Model):
+    archivo = models.FileField(upload_to=archivo_upload_path)
     nombre_archivo_id = models.ForeignKey(Tipoarchivo, on_delete=models.CASCADE)
     proyectoid = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
 

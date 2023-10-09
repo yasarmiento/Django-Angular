@@ -37,8 +37,10 @@ import { TipoarchivoaddComponent } from './components/tipoarchivoadd/tipoarchivo
 import { TipoarchivoformComponent } from './components/tipoarchivoform/tipoarchivoform.component';
 import { ArchivoaddComponent } from './components/archivoadd/archivoadd.component';
 import { ArchivoformComponent } from './components/archivoform/ArchivoformComponent';
-
-
+import { FileUploadModule } from 'primeng/fileupload'
+import { ToastModule } from 'primeng/toast'
+import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -75,13 +77,17 @@ import { ArchivoformComponent } from './components/archivoform/ArchivoformCompon
     TableModule,
     ButtonModule,
     DropdownModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     MenubarModule,
     SidebarModule,
     CardModule,
     CheckboxModule,
+    FileUploadModule,
+    ToastModule,
+    DialogModule,
   ],
-  providers: [],
+  providers: [MessageService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -21,8 +21,9 @@ export class ArchivoComponent implements OnInit{
   message = '';
 
   archivos: any;
-  proyecto: any[] = [];
-  nombre_archivo: any[] = [];
+  proyecto: any;
+  nombresArchivos: any;
+
 
   constructor (
     private archivoService: ArchivoService,
@@ -36,7 +37,7 @@ export class ArchivoComponent implements OnInit{
       this.getArchivo(this.route.snapshot.params["id"]);
 
       this.archivoService.getNombresArchivos().subscribe(data => {
-        this.nombre_archivo = data;
+        this.nombresArchivos = data;
       });
   
       this.archivoService.getProyectos().subscribe(data => {
