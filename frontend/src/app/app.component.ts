@@ -73,6 +73,16 @@ export class AppComponent {
               },
             ]
           },
+          {
+            label: 'Archivos',
+            routerLink: ['/archivoform'],
+            items: [
+              {
+                label: 'Agregar un archivo',
+                routerLink: ["/archivoadd"],
+              },
+            ]
+          },
       ];
   }
 

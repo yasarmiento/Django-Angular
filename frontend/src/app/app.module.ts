@@ -41,6 +41,7 @@ import { FileUploadModule } from 'primeng/fileupload'
 import { ToastModule } from 'primeng/toast'
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
+import { SeguimientosformComponent } from './components/seguimientosform/seguimientosform.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { DialogModule } from 'primeng/dialog';
     TipoarchivoformComponent,
     ArchivoaddComponent,
     ArchivoformComponent,
+    SeguimientosformComponent,
   ],
   imports: [
     BrowserModule,

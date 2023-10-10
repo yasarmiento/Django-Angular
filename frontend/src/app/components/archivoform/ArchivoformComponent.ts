@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { TipoarchivoI } from 'src/app/models/tipoarchivo.model';
 import { MessageService } from 'primeng/api';
 
-
 @Component({
   selector: 'app-archivoform',
   templateUrl: './archivoform.component.html',
@@ -16,6 +15,7 @@ export class ArchivoformComponent implements OnInit {
   archivos: any;
   archivo?: TipoarchivoI[];
   visible: boolean = false;
+  archivoNombre: string = '';
   currentArchivoI: ArchivoI = {
     archivo: '',
     nombre_archivo_id: '',
@@ -35,7 +35,6 @@ export class ArchivoformComponent implements OnInit {
 
   constructor(private archivoService: ArchivoService, private http: HttpClient,
     private messageService: MessageService) { }
-
 
   ngOnInit(): void {
     this.retrieveArchivo();
@@ -86,36 +85,80 @@ export class ArchivoformComponent implements OnInit {
   obtenerDatos(): void {
     this.archivoService.getNombresArchivos().subscribe((data) => {
       this.nombresArchivos = data;
+      console.log("tipos de archivos: ", this.nombresArchivos)
     });
 
     this.archivoService.getProyectos().subscribe((data) => {
       this.proyectos = data;
     });
+  }
 
+  obtenerNombresArchivos(archivoId: number){
+    const archivo = this.nombresArchivos.find(r => r.id === archivoId);
+    return archivo ? `${archivo.nombre_archivo}` : 'archivo no encontrado'
+  }
+
+  obtenerNombresProyectos(proyectoId: number){
+    const proyecto = this.proyectos.find(r => r.id === proyectoId);
+    return proyecto ? `${proyecto.proyecto}` : 'archivo no encontrado'
   }
 
   saveArchivo(): void {
     if (this.archivoseleccionado != null) {
       const data = new FormData();
-      data.append('archivo', this.archivoseleccionado)
-      data.append('nombre_archivo_id', this.archivosCrear.nombre_archivo_id)
-      data.append('proyectoid', this.archivosCrear.proyectoid)
-
-      this.archivoService.create(data)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-            this.submitted = true;
-            console.log("archivo cargado")
-            this.CerrarDialog();
-            this.messageService.add({ severity: 'success', summary: 'archivo cargado', detail: 'el archivo se cargo exitossamente al proyecto seleccionado' })
-          },
-          error: (e) => console.error(e)
-        })
+      data.append('archivo', this.archivoseleccionado);
+      data.append('nombre_archivo_id', this.archivosCrear.nombre_archivo_id);
+      data.append('proyectoid', this.archivosCrear.proyectoid);
+  
+      if (this.currentIndex !== -1) {
+        // Llama al método de actualización en lugar de creación
+        this.archivoService.update(this.archivos[this.currentIndex].id, data)
+          .subscribe({
+            next: (res) => {
+              console.log(res);
+              this.submitted = true;
+              console.log("archivo actualizado");
+              this.CerrarDialog();
+              this.messageService.add({ severity: 'success', summary: 'archivo actualizado', detail: 'Los cambios se guardaron exitosamente' });
+              // Actualiza los datos en la tabla
+              this.archivos[this.currentIndex] = { ...this.archivosCrear };
+            },
+            error: (e) => console.error(e)
+            
+          });
+      } else {
+        // Llama al método de creación si no estás editando
+        this.archivoService.create(data)
+          .subscribe({
+            next: (res) => {
+              console.log(res);
+              this.submitted = true;
+              console.log("archivo cargado");
+              this.CerrarDialog();
+              this.messageService.add({ severity: 'success', summary: 'archivo cargado', detail: 'El archivo se cargó exitosamente al proyecto seleccionado' });
+              // Agrega los nuevos datos a la tabla
+              this.archivos.push({ ...this.archivosCrear });
+            },
+            error: (e) => console.error(e)
+          });
+      }
     } else {
       console.error("ERRORRR");
-      this.messageService.add({ severity: 'error', summary: 'error al cargar el archivo' })
+      this.messageService.add({ severity: 'error', summary: 'error al cargar el archivo' });
     }
+  }
+
+  editArchivo(rowData: any): void {
+    // Cargar los detalles del archivo en el formulario de edición
+    this.archivoNombre = rowData.archivo.split('/').pop();
+    this.archivosCrear = {
+      archivo: rowData.archivo,
+      nombre_archivo_id: rowData.nombre_archivo_id,
+      proyectoid: rowData.proyectoid
+    };
+    this.currentIndex = this.archivos.indexOf(rowData);
+    console.log("archivo a editar: ",this.archivosCrear)
+    this.showDialog(); // Mostrar el formulario de edición en la ventana modal
   }
 
   newArchivo(): void {
@@ -130,4 +173,13 @@ export class ArchivoformComponent implements OnInit {
   onFileSelect(event: any): void {
     this.archivoseleccionado = (event.files as File[])[0];
   }
+
+  getFileName(url: string): string {
+    if (url) {
+      const parts = url.split('/');
+      return parts[parts.length - 1];
+    }
+    return '';
+  }
+  
 }
