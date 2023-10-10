@@ -77,14 +77,6 @@ class SemilleroinvestigacionSerializer(serializers.ModelSerializer):
             'semilleroinvestigacion',
         ]
 
-class GrupodeinvestigacionSerializer(serializers.ModelSerializer):
- 
-    class Meta:
-        model = Grupodeinvestigacion
-        fields = [
-            'id',
-            'grupodeinvestigacion',
-        ]
 
 class ProyectoxUsuarioSerializer(serializers.ModelSerializer):
  

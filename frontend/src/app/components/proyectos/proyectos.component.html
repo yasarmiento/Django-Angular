@@ -7,19 +7,24 @@
             <p-table 
             [value]="proyectos"
             [paginator]="true"
-            [rows]="10"
+            [rows]="5"
+            [rowsPerPageOptions]="[5, 10, 20]"
             [columns]="proyectos"
             class="custom-table">
             <ng-template pTemplate="header" let-columns >
               <tr class="custom-header">
                 <th>Id</th>
-                <th>Proyecto</th>
+                <th pSortableColumn="proyecto">Proyecto<p-sortIcon field="proyecto"></p-sortIcon></th>
                 <th>Codigo</th>
-                <th>Plazo</th>
+                <th pSortableColumn="plazo">Plazo<p-sortIcon field="plazo"></p-sortIcon></th>
                 <th>Rol Universidad</th>
                 <th>Fecha de inicio</th>
                 <th>Fecha de fin</th>
-                <th>Visualizar</th>
+                <th>Convocatoria</th>
+                <th>Operador</th>
+                <th>Entidad Financiadora</th>
+                <th>Grupo de Investigación</th>
+                <th>Detalles</th>
               </tr>
             </ng-template>
             <ng-template
@@ -34,8 +39,12 @@
                 <td>{{rowData.roluniversidadid}}</td>
                 <td>{{rowData.fechai}}</td>
                 <td>{{rowData.fechaf}}</td>
+                <td>{{rowData.convocatoriaid}}</td>
+                <td>{{rowData.operadorid}}</td>
+                <td>{{rowData.entidadfinanciadora}}</td>
+                <td>{{rowData.grupoinvestigacionid}}</td>
                 <td>
-                  <p-button label="Ver Detalles" icon="pi pi-eye" routerLink="/seguimientos"></p-button>
+                  <button pButton type="button" label="Ver Detalles" icon="pi pi-eye" class="p-button-warning p-button-outlined boton-redondo" routerLink="/seguimientos"></button>
                 </td>
               </tr>
             </ng-template>

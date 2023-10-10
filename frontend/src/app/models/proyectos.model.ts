@@ -5,6 +5,11 @@ export interface ProyectosI {
     plazo : number;
     fechai : Date;
     fechaf : Date;
+    convocatoriaid: any;
+    roluniversidadid: any;
+    operadorid: any;
+    entidadfinanciadora: any;
+    grupoinvestigacionid: any;
 }
 
 export class Convocatoria {

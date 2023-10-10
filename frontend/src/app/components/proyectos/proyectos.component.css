@@ -1,19 +1,74 @@
-/* Estilo de la tabla */
+
+.boton-redondo{
+  border-radius: 10px;
+}
+/* Estilo para la tabla */
 .custom-table {
-    border-collapse: collapse; /* Fusiona los bordes de las celdas */
-  }
-  
-  /* Estilo de las celdas del encabezado */
-  .custom-table th {
-    background-color: #f0af2b;
-    color: #42bdcc;
-    text-align: left;
-    padding: 10px;
-    border: 1px solid #e44d3f;
-  }
-  
-  /* Estilo de las celdas de datos */
-  .custom-table td {
-    padding: 5px;
-    border: 1px solid #e44d3f;
-  }
+width: 100%;
+margin-top: 20px;
+
+}
+
+/* Estilo para los encabezados de columna */
+.custom-table th {
+background-color: #007bff; /* Color de fondo del encabezado */
+color: white; /* Color del texto del encabezado */
+text-align: left; /* Alineación del texto */
+padding: 10px; /* Espaciado interno */
+}
+
+/* Estilo para las filas impares */
+.custom-table tbody tr:nth-child(odd) {
+background-color: #f2f2f2; /* Fondo de fila impar */
+}
+
+/* Estilo para las filas al pasar el ratón sobre ellas */
+.custom-table tbody tr:hover {
+background-color: #e0e0e0; /* Fondo al pasar el ratón */
+}
+
+/* Estilo para el botón de "Editar" */
+.p-button-success {
+background-color: #28a745; /* Color de fondo del botón */
+color: white; /* Color del texto del botón */
+border: none; /* Sin borde */
+padding: 5px 10px; /* Espaciado interno */
+cursor: pointer; /* Cambio de cursor al pasar el ratón */
+border-radius: 5px; /* Borde redondeado */
+}
+
+/* Estilo para el botón de "Editar" al pasar el ratón sobre él */
+.p-button-success:hover {
+background-color: #218838; /* Cambio de color al pasar el ratón */
+}
+
+/* Estilo para el enlace del archivo */
+.custom-table a {
+color: #007bff; /* Color del enlace */
+text-decoration: none; /* Sin subrayado */
+}
+
+/* Estilo para el enlace del archivo al pasar el ratón sobre él */
+.custom-table a:hover {
+text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+.custom-table {
+border-collapse: collapse; /* Colapsar bordes para crear líneas entre celdas */
+width: 100%;
+}
+
+.custom-table th, .custom-table td {
+border: 1px solid #ddd; /* Borde de 1px con color gris claro */
+padding: 8px; /* Espaciado interno */
+text-align: left;
+}
+
+.file-cell {
+white-space: nowrap; /* Evitar que el nombre del archivo se rompa en varias líneas */
+}
+
+.file-link {
+text-decoration: none; /* Sin subrayado para los enlaces de archivos */
+color: #007bff; /* Color del enlace */
+}

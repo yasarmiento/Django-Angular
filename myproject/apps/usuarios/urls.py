@@ -27,10 +27,6 @@ urlpatterns = [
     path('semilleros_investigacion', views.SemilleroinvestigacionListCreateView.as_view(), name='semillero-investigacion-list-create'),
     path('semilleros_investigacion/<int:pk>', views.SemilleroinvestigacionDetailView.as_view(), name='semillero-investigacion-detail'),
 
-    # URLs para la tabla Grupodeinvestigacion
-    path('grupos_investigacion', views.GrupodeinvestigacionListCreateView.as_view(), name='grupo-investigacion-list-create'),
-    path('grupos_investigacion/<int:pk>', views.GrupodeinvestigacionDetailView.as_view(), name='grupo-investigacion-detail'),
-
     # URLs para la tabla ProyectoxUsuario
     path('proyectos_usuarios', views.ProyectoxUsuarioListCreateView.as_view(), name='proyecto-usuario-list-create'),
     path('proyectos_usuarios/<int:pk>', views.ProyectoxUsuarioDetailView.as_view(), name='proyecto-usuario-detail'),

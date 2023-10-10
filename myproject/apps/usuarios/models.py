@@ -1,5 +1,5 @@
 from django.db import models
-from apps.proyectos.models import Proyecto
+from apps.proyectos.models import Proyecto, Grupoinvestigacion
 # Create your models here.
 
 class Facultad (models.Model):
@@ -26,11 +26,7 @@ class Semilleroinvestigacion (models.Model):
     def __str__(self):
         return self.semilleroinvestigacion
 
-class Grupodeinvestigacion (models.Model):
-    grupoinvestigacion = models.CharField(max_length=150)
 
-    def __str__(self):
-        return self.grupoinvestigacion
 
 class Usuarios (models.Model):
     usuario = models.CharField(max_length=150)
@@ -42,7 +38,7 @@ class Usuarios (models.Model):
     tipoestudianteid = models.ForeignKey(Tipoestudiante, on_delete=models.CASCADE, null=True, blank=True)
     facultadid = models.ForeignKey(Facultad, on_delete=models.CASCADE)
     rolinvestigadorid = models.ForeignKey(Rol_investigador, on_delete=models.CASCADE, null=True, blank=True)
-    grupoinvestigacionid = models.ForeignKey(Grupodeinvestigacion, on_delete=models.CASCADE)
+    grupoinvestigacionid = models.ForeignKey(Grupoinvestigacion, on_delete=models.CASCADE)
     semilleroinvestigacionid = models.ForeignKey(Semilleroinvestigacion, on_delete=models.CASCADE)
     proyectoid = models.ManyToManyField(Proyecto, through='ProyectoxUsuario')
     

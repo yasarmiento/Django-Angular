@@ -71,15 +71,6 @@ class SemilleroinvestigacionDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Semilleroinvestigacion.objects.all()
     serializer_class = SemilleroinvestigacionSerializer
 
-# Vista para la tabla Grupodeinvestigacion
-class GrupodeinvestigacionListCreateView(generics.ListCreateAPIView):
-    queryset = Grupodeinvestigacion.objects.all()
-    serializer_class = GrupodeinvestigacionSerializer
-
-class GrupodeinvestigacionDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Grupodeinvestigacion.objects.all()
-    serializer_class = GrupodeinvestigacionSerializer
-
 # Vista para la tabla ProyectoxUsuario
 class ProyectoxUsuarioListCreateView(generics.ListCreateAPIView):
     queryset = ProyectoxUsuario.objects.all()
