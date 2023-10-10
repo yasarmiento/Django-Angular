@@ -5,11 +5,11 @@
       <p-card header="Proyectos">
           <div style="text-align: center">
             <p-table 
-            [value]="proyectos"
+            [value]="pro"
             [paginator]="true"
             [rows]="5"
             [rowsPerPageOptions]="[5, 10, 20]"
-            [columns]="proyectos"
+            [columns]="pro"
             class="custom-table">
             <ng-template pTemplate="header" let-columns >
               <tr class="custom-header">
@@ -26,23 +26,23 @@
                 <th>Grupo de Investigación</th>
                 <th>Detalles</th>
               </tr>
-            </ng-template>
+            </ng-template>  
             <ng-template
               pTemplate="body"
               let-rowData
-              let-columns="columns">
+              let-rowIndex="rowIndex">
               <tr>
-                <td>{{rowData.id}}</td>        
+                <td>{{rowIndex + 1 }}</td>     
                 <td>{{rowData.proyecto}}</td>
                 <td>{{rowData.codigo}}</td>
                 <td>{{rowData.plazo}}</td>
-                <td>{{rowData.roluniversidadid}}</td>
+                <td>{{ obtenerRolU(rowData.roluniversidadid) }}</td>
                 <td>{{rowData.fechai}}</td>
                 <td>{{rowData.fechaf}}</td>
-                <td>{{rowData.convocatoriaid}}</td>
-                <td>{{rowData.operadorid}}</td>
-                <td>{{rowData.entidadfinanciadora}}</td>
-                <td>{{rowData.grupoinvestigacionid}}</td>
+                <td>{{ obtenerConvocatoriaNombre(rowData.convocatoriaid) }}</td>
+                <td>{{ obtenerOperadorNombre(rowData.operadorid) }}</td>
+                <td>{{ obtenerEntidadF(rowData.entidadfinanciadora) }}</td>
+                <td>{{ obtenerGrupoI(rowData.grupoinvestigacionid) }}</td>
                 <td>
                   <button pButton type="button" label="Ver Detalles" icon="pi pi-eye" class="p-button-warning p-button-outlined boton-redondo" routerLink="/seguimientos"></button>
                 </td>

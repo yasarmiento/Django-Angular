@@ -10,16 +10,10 @@ const base = 'http://127.0.0.1:8000'
   providedIn: 'root'
 })
 export class ProyectosService {
-  api_uri = "http://127.0.0.1:8000";
-  base_path = `${this.api_uri}/`
+  
   constructor(
     private http:HttpClient
   ) { }
-
-  getAllProyectos():Observable<{proyecto:ProyectosI[]}>{
-    return this.http
-      .get<{proyecto:ProyectosI[]}>(this.base_path)
-  }
 
   getAll(): Observable<ProyectosI[]>{
     return this.http.get<ProyectosI[]>(base);
@@ -56,7 +50,7 @@ export class ProyectosService {
     return this.http.get<any[]>(`${base}/entidades_financiadoras`);
   }
   getGrupoInvestigacion(): Observable<any[]> {
-    return this.http.get<any[]>(`${base}`);
+    return this.http.get<any[]>(`${base}/grupos_investigacion`);
   }
 
 }
