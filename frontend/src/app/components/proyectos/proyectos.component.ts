@@ -11,8 +11,9 @@ import { ProyectosI } from 'src/app/models/proyectos.model';
 })
 
 export class ProyectosComponent {
-  pro: any;
 
+  pro: any;
+  editMode: boolean = false;
   proyect?: ProyectosI[];
   visible: boolean = false;
   convocatoriaNombre: any[] = [];
@@ -21,6 +22,20 @@ export class ProyectosComponent {
   entidadFNombre: any[] = [];
   grupoINombre: any[] = [];
   currentIndex = -1;
+  editingProyecto: ProyectosI = {
+    proyecto: '',
+    codigo: '',
+    plazo: 0,
+    fechai: new Date(),
+    fechaf: new Date(),
+    convocatoriaid: null,
+    roluniversidadid: null,
+    operadorid: null,
+    entidadfinanciadora: '',
+    grupoinvestigacionid: '',
+  };
+
+  editingIndex: number = -1;
 
   currentProyectosI: ProyectosI = {
     proyecto: '',
@@ -41,15 +56,15 @@ export class ProyectosComponent {
     plazo: 0,
     fechai: new Date(),
     fechaf: new Date(),
-    convocatoriaid: '',
-    roluniversidadid: '',
-    operadorid: '',
+    convocatoriaid: null,
+    roluniversidadid: null,
+    operadorid: null,
     entidadfinanciadora: '',
     grupoinvestigacionid: '',
   };
 
-  constructor (private proyectoService: ProyectosService, private http: HttpClient,
-    private messageService: MessageService) {}
+  constructor(private proyectoService: ProyectosService, private http: HttpClient,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.retrieveProyectos();
@@ -59,7 +74,7 @@ export class ProyectosComponent {
           this.pro = proyecto;
         }
       );
-      this.obtenerDatos();
+    this.obtenerDatos();
   }
 
   retrieveProyectos(): void {
@@ -100,8 +115,39 @@ export class ProyectosComponent {
     this.visible = true;
   }
 
-  CerrarDialog() { 
+  CerrarDialog() {
     this.visible = false;
+  }
+
+  crearProyecto() {
+    if (this.editMode) {
+      // Modo de edición
+      if (this.editingProyecto != null) {
+        this.proyectoService.update(this.editingProyecto).subscribe(() => {
+          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto editado con éxito' });
+          this.refreshList();
+          this.CerrarDialog();
+        }, (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo editar el proyecto' });
+        });
+      }
+    } else {
+      // Modo de creación (tu código existente)
+      this.proyectoService.create(this.crearProyectosI).subscribe(() => {
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto creado con éxito' });
+        this.refreshList();
+        this.CerrarDialog();
+      }, (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo crear el proyecto' });
+      });
+    }
+    this.editMode = false; // Restablecer el modo de edición
+  }
+
+
+  cancelEdit() {
+    this.editingIndex = -1;
+    this.CerrarDialog();
   }
 
   obtenerDatos(): void {
@@ -134,26 +180,37 @@ export class ProyectosComponent {
 
   //obtener los nombres desde las tablas tipo
 
-  obtenerConvocatoriaNombre(convocatoriaId: number){
+  obtenerConvocatoriaNombre(convocatoriaId: number) {
     const convocatoria = this.convocatoriaNombre.find(r => r.id === convocatoriaId);
     return convocatoria ? `${convocatoria.convocatoria}` : 'convocatoria no encontrada'
   }
 
-  obtenerRolU(rolUId: number){
+  obtenerRolU(rolUId: number) {
     const roles = this.rolU.find(r => r.id === rolUId);
     return roles ? `${roles.rolU}` : 'rol no encontrado'
   }
-  obtenerOperadorNombre(operadorID: number){
+  obtenerOperadorNombre(operadorID: number) {
     const operador = this.operadorNombre.find(r => r.id === operadorID);
     return operador ? `${operador.operador}` : 'operador no encontrado'
   }
 
-  obtenerEntidadF(entidadFId: number){
+  obtenerEntidadF(entidadFId: number) {
     const entidadf = this.entidadFNombre.find(r => r.id === entidadFId);
     return entidadf ? `${entidadf.entidadfinanciadora}` : 'entidad financiadora no encontrada'
   }
-  obtenerGrupoI(gurupoId: number){
+  obtenerGrupoI(gurupoId: number) {
     const grupoI = this.grupoINombre.find(r => r.id === gurupoId);
     return grupoI ? `${grupoI.grupoinvestigacion}` : 'grupo de investigacion no encontrado'
   }
+
+  // EDITAAAAR
+
+  editProyecto(proyecto: ProyectosI, index: number) {
+    this.editMode = true;
+    this.editingProyecto = { ...proyecto }; // Clonar el proyecto para no modificar el original directamente
+    this.editingIndex = index;
+    this.visible = true; // Mostrar el diálogo de creación/edición
+  }
+
+
 }

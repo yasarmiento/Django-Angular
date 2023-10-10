@@ -2,6 +2,7 @@
 .boton-redondo{
   border-radius: 10px;
 }
+
 /* Estilo para la tabla */
 .custom-table {
 width: 100%;
@@ -37,11 +38,6 @@ cursor: pointer; /* Cambio de cursor al pasar el ratón */
 border-radius: 5px; /* Borde redondeado */
 }
 
-/* Estilo para el botón de "Editar" al pasar el ratón sobre él */
-.p-button-success:hover {
-background-color: #218838; /* Cambio de color al pasar el ratón */
-}
-
 /* Estilo para el enlace del archivo */
 .custom-table a {
 color: #007bff; /* Color del enlace */
@@ -71,4 +67,67 @@ white-space: nowrap; /* Evitar que el nombre del archivo se rompa en varias lín
 .file-link {
 text-decoration: none; /* Sin subrayado para los enlaces de archivos */
 color: #007bff; /* Color del enlace */
+}
+
+/* Contenedor del formulario */
+.form-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Campos del formulario */
+.form-field {
+  margin-bottom: 15px;
+}
+
+/* Estilos para etiquetas */
+.form-field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Estilos para campos de entrada de texto y número */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Estilos para selects */
+.input-field select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+
+/* Estilos para botones */
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Estilos para el formulario en dispositivos móviles */
+@media (max-width: 768px) {
+  .form-container {
+    max-width: 100%;
+    padding: 10px;
+  }
+  .form-field {
+    margin-bottom: 10px;
+  }
+  .input-field, .input-field select {
+    padding: 5px;
+  }
+  .button {
+    padding: 8px 15px;
+  }
 }

@@ -42,6 +42,7 @@ import { ToastModule } from 'primeng/toast'
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { SeguimientosformComponent } from './components/seguimientosform/seguimientosform.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { SeguimientosformComponent } from './components/seguimientosform/seguimi
     ArchivoaddComponent,
     ArchivoformComponent,
     SeguimientosformComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -81,6 +83,7 @@ import { SeguimientosformComponent } from './components/seguimientosform/seguimi
     DropdownModule,
     BrowserAnimationsModule,
     MenubarModule,
+    ReactiveFormsModule,
     SidebarModule,
     CardModule,
     CheckboxModule,

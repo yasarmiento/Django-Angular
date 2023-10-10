@@ -10,12 +10,12 @@ const base = 'http://127.0.0.1:8000'
   providedIn: 'root'
 })
 export class ProyectosService {
-  
+
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  getAll(): Observable<ProyectosI[]>{
+  getAll(): Observable<ProyectosI[]> {
     return this.http.get<ProyectosI[]>(base);
   }
 
@@ -27,9 +27,9 @@ export class ProyectosService {
     return this.http.post(`${base}`, data);
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${base}/${id}`, data);
-  }
+  update(proyecto: ProyectosI): Observable<any> {
+    return this.http.put(`${base}/proproyectos/${proyecto.id}`, proyecto);
+  }  
 
   delete(id: any): Observable<any> {
     return this.http.delete(`${base}/${id}`);
@@ -38,14 +38,14 @@ export class ProyectosService {
   getRolU(): Observable<any[]> {
     return this.http.get<any[]>(`${base}/roles_universidad`);
   }
-  
+
   getConvocatoria(): Observable<any[]> {
     return this.http.get<any[]>(`${base}/convocatorias`);
   }
   getOperador(): Observable<any[]> {
     return this.http.get<any[]>(`${base}/operadores`);
   }
-  
+
   getEntidadF(): Observable<any[]> {
     return this.http.get<any[]>(`${base}/entidades_financiadoras`);
   }
