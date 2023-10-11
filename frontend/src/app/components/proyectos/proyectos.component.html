@@ -59,28 +59,38 @@
 
       <div class="form-field">
         <label for="codigo">Código del Proyecto</label>
-        <input type="text" id="codigo" [(ngModel)]="editMode ? editingProyecto.codigo : crearProyectosI.codigo" name="codigo" required class="input-field">
+        <input type="text" id="codigo" [(ngModel)]="editMode ? editingProyecto.codigo : crearProyectosI.codigo"
+          name="codigo" required class="input-field">
       </div>
-      
+
       <div class="form-field">
         <label for="plazo">Plazo</label>
-        <input type="number" id="plazo" [(ngModel)]="editMode ? editingProyecto.plazo : crearProyectosI.plazo" name="plazo" required class="input-field">
+        <input type="number" id="plazo" [(ngModel)]="editMode ? editingProyecto.plazo : crearProyectosI.plazo"
+          name="plazo" required class="input-field">
       </div>
-      
+
       <div class="form-field">
         <label for="fechai">Fecha de Inicio</label>
-        <input type="date" id="fechai" [(ngModel)]="editMode ? editingProyecto.fechai : crearProyectosI.fechai" name="fechai" required class="input-field">
+        <input type="date" id="fechai"
+          [ngModel]="formatDate(editMode ? editingProyecto.fechai : crearProyectosI.fechai)"
+          (ngModelChange)="editMode ? editingProyecto.fechai = $event : crearProyectosI.fechai = $event" name="fechai"
+          required class="input-field">
       </div>
-      
+
+
       <div class="form-field">
         <label for="fechaf">Fecha de Fin</label>
-        <input type="date" id="fechaf" [(ngModel)]="editMode ? editingProyecto.fechaf : crearProyectosI.fechaf" name="fechaf" required class="input-field">
+        <input type="date" id="fechaf" 
+        [ngModel]="formatDate(editMode ? editingProyecto.fechaf : crearProyectosI.fechaf)"
+        (ngModelChange)="editMode ? editingProyecto.fechaf = $event : crearProyectosI.fechaf = $event"
+          name="fechaf" required class="input-field">
       </div>
 
       <div class="form-field">
         <label for="convocatoria">Convocatoria</label>
-        <select id="convocatoria" [(ngModel)]="editMode ? editingProyecto.convocatoriaid : crearProyectosI.convocatoriaid" name="convocatoria" required
-          class="input-field">
+        <select id="convocatoria"
+          [(ngModel)]="editMode ? editingProyecto.convocatoriaid : crearProyectosI.convocatoriaid" name="convocatoria"
+          required class="input-field">
           <option *ngFor="let convocatoria of convocatoriaNombre" [value]="convocatoria.id">{{ convocatoria.convocatoria
             }}</option>
         </select>
@@ -88,31 +98,35 @@
 
       <div class="form-field">
         <label for="rolUniversidad">Rol Universidad</label>
-        <select id="rolUniversidad" [(ngModel)]="editMode ? editingProyecto.roluniversidadid : crearProyectosI.roluniversidadid" name="rolUniversidad" required
-          class="input-field">
+        <select id="rolUniversidad"
+          [(ngModel)]="editMode ? editingProyecto.roluniversidadid : crearProyectosI.roluniversidadid"
+          name="rolUniversidad" required class="input-field">
           <option *ngFor="let rol of rolU" [value]="rol.id">{{ rol.rolU }}</option>
         </select>
       </div>
 
       <div class="form-field">
         <label for="operador">Operador</label>
-        <select id="operador" [(ngModel)]="editMode ? editingProyecto.operadorid : crearProyectosI.operadorid" name="operador" required class="input-field">
+        <select id="operador" [(ngModel)]="editMode ? editingProyecto.operadorid : crearProyectosI.operadorid"
+          name="operador" required class="input-field">
           <option *ngFor="let operador of operadorNombre" [value]="operador.id">{{ operador.operador }}</option>
         </select>
       </div>
 
       <div class="form-field">
         <label for="entidadFinanciadora">Entidad Financiadora</label>
-        <select id="entidadFinanciadora" [(ngModel)]="editMode ? editingProyecto.entidadfinanciadora : crearProyectosI.entidadfinanciadora" name="entidadFinanciadora"
-          required class="input-field">
+        <select id="entidadFinanciadora"
+          [(ngModel)]="editMode ? editingProyecto.entidadfinanciadora : crearProyectosI.entidadfinanciadora"
+          name="entidadFinanciadora" required class="input-field">
           <option *ngFor="let entidad of entidadFNombre" [value]="entidad.id">{{ entidad.entidadfinanciadora }}</option>
         </select>
       </div>
 
       <div class="form-field">
         <label for="grupoInvestigacion">Grupo de Investigación</label>
-        <select id="grupoInvestigacion" [(ngModel)]="editMode ? editingProyecto.grupoinvestigacionid : crearProyectosI.grupoinvestigacionid" name="grupoInvestigacion"
-          required class="input-field">
+        <select id="grupoInvestigacion"
+          [(ngModel)]="editMode ? editingProyecto.grupoinvestigacionid : crearProyectosI.grupoinvestigacionid"
+          name="grupoInvestigacion" required class="input-field">
           <option *ngFor="let grupo of grupoINombre" [value]="grupo.id">{{ grupo.grupoinvestigacion }}</option>
         </select>
       </div>

@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProyectosI } from '../models/proyectos.model';
 
-const base = 'http://127.0.0.1:8000'
+const base = 'http://127.0.0.1:8000/proyectos'
+const baseUrl = 'http://127.0.0.1:8000/'
 
 
 @Injectable({
@@ -27,8 +28,8 @@ export class ProyectosService {
     return this.http.post(`${base}`, data);
   }
 
-  update(proyecto: ProyectosI): Observable<any> {
-    return this.http.put(`${base}/proproyectos/${proyecto.id}`, proyecto);
+  update(id: any, data: any): Observable<any> {
+    return this.http.put(`${base}/${id}`, data);
   }  
 
   delete(id: any): Observable<any> {
@@ -36,21 +37,21 @@ export class ProyectosService {
   }
 
   getRolU(): Observable<any[]> {
-    return this.http.get<any[]>(`${base}/roles_universidad`);
+    return this.http.get<any[]>(`${baseUrl}/roles_universidad`);
   }
 
   getConvocatoria(): Observable<any[]> {
-    return this.http.get<any[]>(`${base}/convocatorias`);
+    return this.http.get<any[]>(`${baseUrl}/convocatorias`);
   }
   getOperador(): Observable<any[]> {
-    return this.http.get<any[]>(`${base}/operadores`);
+    return this.http.get<any[]>(`${baseUrl}/operadores`);
   }
 
   getEntidadF(): Observable<any[]> {
-    return this.http.get<any[]>(`${base}/entidades_financiadoras`);
+    return this.http.get<any[]>(`${baseUrl}/entidades_financiadoras`);
   }
   getGrupoInvestigacion(): Observable<any[]> {
-    return this.http.get<any[]>(`${base}/grupos_investigacion`);
+    return this.http.get<any[]>(`${baseUrl}/grupos_investigacion`);
   }
 
 }

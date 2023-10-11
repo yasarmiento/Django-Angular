@@ -29,13 +29,11 @@ import { OperadoraddComponent } from './components/operadoradd/operadoradd.compo
 import { OperadorformComponent } from './components/operadorform/operadorform.component';
 import { UsuariosformComponent } from './components/usuariosform/usuariosform.component';
 import { UsuariosaddComponent } from './components/usuariosadd/usuariosadd.component';
-import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.component';
 import { EntidadfformComponent } from './components/entidadfform/entidadfform.component';
 import { RolUaddComponent } from './components/rol-uadd/rol-uadd.component';
 import { RolUformComponent } from './components/rol-uform/rol-uform.component';
 import { TipoarchivoaddComponent } from './components/tipoarchivoadd/tipoarchivoadd.component';
 import { TipoarchivoformComponent } from './components/tipoarchivoform/tipoarchivoform.component';
-import { ArchivoaddComponent } from './components/archivoadd/archivoadd.component';
 import { ArchivoformComponent } from './components/archivoform/ArchivoformComponent';
 import { FileUploadModule } from 'primeng/fileupload'
 import { ToastModule } from 'primeng/toast'
@@ -43,6 +41,10 @@ import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { SeguimientosformComponent } from './components/seguimientosform/seguimientosform.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { CalendarModule } from 'primeng/calendar';
+import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.component';
 
 @NgModule({
   declarations: [
@@ -68,13 +70,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     RolUformComponent,
     TipoarchivoaddComponent,
     TipoarchivoformComponent,
-    ArchivoaddComponent,
     ArchivoformComponent,
     SeguimientosformComponent,
 
   ],
   imports: [
     BrowserModule,
+    MatDatepickerModule,
+    CalendarModule,
+    MatNativeDateModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

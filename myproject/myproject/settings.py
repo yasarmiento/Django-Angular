@@ -137,3 +137,8 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:4200",
     'http://localhost:8081',
 )
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'myproject.middleware.custom_exception_handler'
+    
+}

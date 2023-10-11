@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('', views.ProyectoListView.as_view(), name='proyecto-list'),
+    path('proyectos', views.ProyectoListView.as_view(), name='proyecto-list'),
     path('proyectos/<int:pk>', views.ProyectoDetailView.as_view(), name='proyecto-detail'),
 
     # URLs para la tabla Convocatoria

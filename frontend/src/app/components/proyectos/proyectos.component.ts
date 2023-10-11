@@ -68,7 +68,7 @@ export class ProyectosComponent {
 
   ngOnInit() {
     this.retrieveProyectos();
-    this.http.get("http://127.0.0.1:8000/")
+    this.http.get("http://127.0.0.1:8000/proyectos")
       .subscribe(
         proyecto => {
           this.pro = proyecto;
@@ -112,6 +112,7 @@ export class ProyectosComponent {
   }
 
   showDialog() {
+    console.log("Creando un proyecto")
     this.visible = true;
   }
 
@@ -119,23 +120,41 @@ export class ProyectosComponent {
     this.visible = false;
   }
 
-  crearProyecto() {
-    if (this.editMode) {
-      // Modo de edición
-      if (this.editingProyecto != null) {
-        this.proyectoService.update(this.editingProyecto).subscribe(() => {
-          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto editado con éxito' });
-          this.refreshList();
-          this.CerrarDialog();
-        }, (error) => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo editar el proyecto' });
-        });
-      }
+  crearProyecto(): void {
+    if (this.editMode && this.editingProyecto != null) {
+      const data = new FormData();
+      console.log(this.editingProyecto)
+      data.append('proyecto', this.editingProyecto.proyecto);
+      data.append('codigo', this.editingProyecto.codigo);
+      data.append('plazo', this.editingProyecto.plazo.toString());
+      const formattedFechaI = this.formatDate(this.editingProyecto.fechai);
+      data.append('fechai', formattedFechaI);
+      const formattedFechaF = this.formatDate(this.editingProyecto.fechaf);
+      data.append('fechaf', formattedFechaF);
+      data.append('convocatoriaid', this.editingProyecto.convocatoriaid.toString());
+      data.append('roluniversidadid', this.editingProyecto.roluniversidadid.toString());
+      data.append('operadorid', this.editingProyecto.operadorid.toString());
+      data.append('entidadfinanciadora', this.editingProyecto.entidadfinanciadora);
+      data.append('grupoinvestigacionid', this.editingProyecto.grupoinvestigacionid.toString());
+
+      console.log("datos para editar: ", data)
+      
+      this.proyectoService.update(this.editingProyecto.id, data).subscribe(() => {
+        console.log("Proyecto editado con exito ")
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto editado con éxito' });
+        this.refreshList();
+        this.CerrarDialog();
+      }, (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo editar el proyecto' });
+      });
+
     } else {
       // Modo de creación (tu código existente)
+      console.log("Creando un proyecto")
       this.proyectoService.create(this.crearProyectosI).subscribe(() => {
         this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto creado con éxito' });
         this.refreshList();
+        console.log("Proyecto creado con exito ")
         this.CerrarDialog();
       }, (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo crear el proyecto' });
@@ -143,7 +162,17 @@ export class ProyectosComponent {
     }
     this.editMode = false; // Restablecer el modo de edición
   }
-
+  
+  
+  formatDate(date: Date): string {
+    if (date instanceof Date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+    return '';
+  }
 
   cancelEdit() {
     this.editingIndex = -1;
@@ -153,30 +182,23 @@ export class ProyectosComponent {
   obtenerDatos(): void {
     this.proyectoService.getConvocatoria().subscribe((data) => {
       this.convocatoriaNombre = data;
-      console.log("Convocatorias: ", this.convocatoriaNombre)
     });
 
     this.proyectoService.getRolU().subscribe((data) => {
       this.rolU = data;
-      console.log("Entidad financiadora: ", this.rolU)
 
     });
     this.proyectoService.getOperador().subscribe((data) => {
       this.operadorNombre = data;
-      console.log("Convocatorias: ", this.convocatoriaNombre)
     });
 
     this.proyectoService.getEntidadF().subscribe((data) => {
       this.entidadFNombre = data;
-      console.log("Entidad financiadora: ", this.entidadFNombre)
-
     });
     this.proyectoService.getGrupoInvestigacion().subscribe((data) => {
       this.grupoINombre = data;
-      console.log("Entidad financiadora: ", this.grupoINombre)
     });
   }
-
 
   //obtener los nombres desde las tablas tipo
 
@@ -210,7 +232,7 @@ export class ProyectosComponent {
     this.editingProyecto = { ...proyecto }; // Clonar el proyecto para no modificar el original directamente
     this.editingIndex = index;
     this.visible = true; // Mostrar el diálogo de creación/edición
+    console.log("Editando: ", this.editingProyecto)
   }
-
 
 }
