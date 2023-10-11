@@ -1,0 +1,51 @@
+<div class="container">
+  
+  <h2>Agregar Archivo</h2>
+  <form (ngSubmit)="saveArchivo()" #archivoForm="ngForm" enctype="multipart/form-data">
+
+    <p-card header="Seleccione el documento relacionado:" [style]="{ width: '100%' }" class="m-2">
+      <ng-template pTemplate="header">
+      </ng-template>
+      <p>
+        <p-dropdown id="nombresArchivos" name="nombresArchivos" [(ngModel)]="archivos.nombre_archivo_id"
+          [options]="nombresArchivos" optionLabel="nombre_archivo" optionValue="id"
+          placeholder="Seleccionar"></p-dropdown>
+      </p>
+      <ng-template pTemplate="footer">
+        <!--<p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>-->
+      </ng-template>
+    </p-card>
+
+    <div class="form-group">
+      <label for="archivo">Archivo:</label>
+      <p-fileUpload name="archivo" (onSelect)="onFileSelect($event)" [maxFileSize]="1000000"
+        [customUpload]="true"></p-fileUpload>
+    </div>
+
+    <div class="form-group mt-2" style=" width: 100%">
+
+      <p-card header="Seleccione proyecto al cual cargar el documento" [style]="{ width: '100%' }" class="m-2">
+        <ng-template pTemplate="header">
+        </ng-template>
+        <p>
+        </p>
+        <p>
+          <p-dropdown id="proyecto" name="proyecto" [(ngModel)]="archivos.proyectoid" [options]="proyectos"
+            optionLabel="proyecto" placeholder="Seleccionar" optionValue="id"></p-dropdown>
+        </p>
+        <ng-template pTemplate="footer">
+          <!--<p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>-->
+        </ng-template>
+      </p-card>
+    </div>
+
+    <button type="submit" pButton class="p-button-primary" label="Guardar"></button>
+  </form>
+</div>
+
+<!-- <p-dialog></p-dialog> -->
+
+
+
+
+<p-toast [style]="{ top: '80px'}"></p-toast>

@@ -45,6 +45,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CalendarModule } from 'primeng/calendar';
 import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.component';
+import { ArchivoaddComponent } from './components/archivoadd/archivoadd.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.compo
     TipoarchivoformComponent,
     ArchivoformComponent,
     SeguimientosformComponent,
+    ArchivoaddComponent,
 
   ],
   imports: [
