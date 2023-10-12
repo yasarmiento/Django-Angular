@@ -1,7 +1,7 @@
 <div class="card-container m-4">
   <div class="card flex justify-content-center">
     <button pButton type="button" label="Agregar Nuevo Seguimiento" icon="pi pi-plus"
-      class="p-button-primary m-2 p-button-outlined boton-redondo"></button>
+      class="p-button-primary m-2 p-button-outlined boton-redondo" (click)="mostrarDialog()"></button>
     <p-card header="Seguimientos">
       <div style="text-align: center">
         <p-table [value]="seguimientos" [paginator]="true" [rows]="10" [columns]="seguimientos" class="custom-table">
@@ -38,9 +38,11 @@
               <td>{{rowData.fechafin}}</td>
               <td>{{ obtenerPasos(rowData.pasosid) }}</td>
               <td>{{ obtenerProyectos(rowData.proyectoid) }}</td>
+
               <td>
                 <button pButton type="button" label="Editar" icon="pi pi-pencil"
-                  class="p-button-warning m-2 p-button-outlined boton-redondo"></button>
+                  class="p-button-warning m-2 p-button-outlined boton-redondo"
+                  (click)="editarSeguimiento(rowData)"></button>
               </td>
             </tr>
           </ng-template>
@@ -49,4 +51,229 @@
     </p-card>
   </div>
 </div>
+
+<!--Formulario creacion de Seguimientos
+
+<p-dialog header="Crear Seguimiento" [(visible)]="displayDialog" [modal]="true" [responsive]="true">
+  <div>
+    <form (ngSubmit)="crearSeguimiento()" class="form-container">
+      <div class="p-fluid">
+
+        <div class="form-field">
+          <label for="descripciontarea">Descripción de Tarea</label>
+          <input type="text" id="proyecto" [(ngModel)]="nuevoSeguimiento.descripciontarea" name="descripciontarea"
+            required class="input-field">
+        </div>
+
+        <div class="form-field">
+          <label for="duracion">Duración</label>
+          <input type="number" id="duracion" [(ngModel)]="nuevoSeguimiento.duracion" name="duracion" required
+            class="input-field">
+        </div>
+
+        <div class="form-field">
+          <label for="tarea_anterior">Tarea Anterior</label>
+          <select id="tarea_anterior" [(ngModel)]="nuevoSeguimiento.tarea_anterior" name="convocatoria" required
+            class="input-field">
+            <option *ngFor="let cont of tareaAnterior" [value]="cont.id">{{
+              cont.descripciontarea
+              }}</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="diasdependencia">Días de Dependencia</label>
+          <input type="number" id="diasdependencia" [(ngModel)]="nuevoSeguimiento.diasdependencia"
+            name="diasdependencia" required class="input-field">
+        </div>
+
+        <div class="form-field">
+          <label for="tipodependenciaid">Tipo de Dependencia</label>
+          <select id="tipodependenciaid" [(ngModel)]="nuevoSeguimiento.tipodependenciaid" name="tipodependenciaid"
+            required class="input-field">
+            <option *ngFor="let cont of tipoDependencia" [value]="cont.id">{{
+              cont.tipodependencia
+              }}</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="inicio">Inicio</label>
+          <input id="inicio" type="date" pInputText [(ngModel)]="nuevoSeguimiento.inicio" name="inicio" required
+            class="input-field">
+        </div>
+
+        <div class="form-field">
+          <label for="fin">Fin</label>
+          <input id="fin" type="date" pInputText [(ngModel)]="nuevoSeguimiento.fin" name="fin" required
+            class="input-field">
+        </div>
+
+        <div class="form-field">
+          <label for="estadoid">Estado</label>
+          <select id="estadoid" [(ngModel)]="nuevoSeguimiento.estadoid" name="estadoid" required class="input-field">
+            <option *ngFor="let cont of estado" [value]="cont.id">{{
+              cont.estado
+              }}</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="responsable">Responsable</label>
+          <input type="text" id="responsable" [(ngModel)]="nuevoSeguimiento.responsable" name="responsable" required
+            class="input-field">
+        </div>
+
+        <div class="form-field">
+          <label for="fechafin">Fecha de Fin Real</label>
+          <input id="fechafin" type="date" pInputText [(ngModel)]="nuevoSeguimiento.fechafin" name="fechafin" required
+            class="input-field">
+        </div>
+
+        <div class="form-field">
+          <label for="pasosid">Pasos</label>
+          <select id="pasosid" [(ngModel)]="nuevoSeguimiento.pasosid" name="pasosid" required class="input-field">
+            <option *ngFor="let cont of pasos" [value]="cont.id">{{
+              cont.nivel
+              }}</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="proyectoid">Proyecto</label>
+          <select id="proyectoid" [(ngModel)]="nuevoSeguimiento.proyectoid" name="proyectoid" required
+            class="input-field">
+            <option *ngFor="let cont of proyecto" [value]="cont.id">{{
+              cont.proyecto
+              }}</option>
+          </select>
+        </div>
+      </div>
+
+      <button pButton type="button" label="Cancelar" class="p-button-danger p-button-outlined boton-redondo m-2"
+        (click)="cerrarDialog()"></button>
+      <button pButton type="submit" label="Guardar"
+        class="p-button-success p-button-outlined boton-redondo m-2"></button>
+    </form>
+  </div>
+
+</p-dialog>
+-->
+
+
+<p-dialog header="{{ seguimientoEditando ? 'Editar Seguimiento' : 'Crear Seguimiento' }}" [(visible)]="displayDialog"
+  [modal]="true" [responsive]="true">
+  <form (ngSubmit)="guardarSeguimiento()" class="form-container">
+    <div class="p-fluid">
+      <div class="form-field">
+        <label for="descripciontarea">Descripción de Tarea</label>
+        <input type="text" id="descripciontarea"
+          [ngModel]="seguimientoEditando ? seguimientoEditando.descripciontarea : nuevoSeguimiento.descripciontarea"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.descripciontarea = $event : nuevoSeguimiento.descripciontarea = $event"
+          name="descripciontarea" required class="input-field">
+      </div>
+
+      <div class="form-field">
+        <label for="duracion">Duración</label>
+        <input type="number" id="duracion"
+          [ngModel]="seguimientoEditando ? seguimientoEditando.duracion : nuevoSeguimiento.duracion" name="duracion"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.duracion = $event : nuevoSeguimiento.duracion = $event"
+          required class="input-field">
+      </div>
+
+      <div class="form-field">
+        <label for="tarea_anterior">Tarea Anterior</label>
+        <select id="tarea_anterior"
+          [ngModel]="seguimientoEditando ? seguimientoEditando.tarea_anterior : nuevoSeguimiento.tarea_anterior"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.tarea_anterior = $event : nuevoSeguimiento.tarea_anterior = $event"
+          name="tarea_anterior" required class="input-field">
+          <option *ngFor="let cont of tareaAnterior" [value]="cont.id">{{ cont.descripciontarea }}</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="diasdependencia">Días de Dependencia</label>
+        <input type="number" id="diasdependencia"
+          [ngModel]="seguimientoEditando ? seguimientoEditando.diasdependencia : nuevoSeguimiento.diasdependencia"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.diasdependencia = $event : nuevoSeguimiento.diasdependencia = $event"
+          name="diasdependencia" required class="input-field">
+      </div>
+
+      <div class="form-field">
+        <label for="tipodependenciaid">Tipo de Dependencia</label>
+        <select id="tipodependenciaid"
+          [ngModel]="seguimientoEditando ? seguimientoEditando.tipodependenciaid : nuevoSeguimiento.tipodependenciaid"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.tipodependenciaid = $event : nuevoSeguimiento.tipodependenciaid = $event"
+          name="tipodependenciaid" required class="input-field">
+          <option *ngFor="let cont of tipoDependencia" [value]="cont.id">{{ cont.tipodependencia }}</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="inicio">Inicio</label>
+        <input id="inicio" type="date" pInputText
+          [ngModel]="formatDate(seguimientoEditando ? seguimientoEditando.inicio : nuevoSeguimiento.inicio)"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.inicio = $event : nuevoSeguimiento.inicio = $event"
+          name="inicio" required class="input-field">
+      </div>
+
+      <div class="form-field">
+        <label for="fin">Fin</label>
+        <input id="fin" type="date" pInputText
+          [ngModel]="seguimientoEditando ? formatDate(seguimientoEditando.fin) : formatDate(nuevoSeguimiento.fin)"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.fin = $event : nuevoSeguimiento.fin =$event "
+          name="fin" required class="input-field">
+      </div>
+
+      <div class="form-field">
+        <label for="estadoid">Estado</label>
+        <select id="estadoid"
+          [ngModel]="seguimientoEditando ? seguimientoEditando.estadoid : nuevoSeguimiento.estadoid" name="estadoid"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.estadoid = $event : nuevoSeguimiento.estadoid = $event"
+          required class="input-field">
+          <option *ngFor="let cont of estado" [value]="cont.id">{{ cont.estado }}</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="responsable">Responsable</label>
+        <input type="text" id="responsable"
+          [ngModel]="seguimientoEditando ? seguimientoEditando.responsable : nuevoSeguimiento.responsable"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.responsable = $event : nuevoSeguimiento.responsable = $event"
+          name="responsable" required class="input-field">
+      </div>
+
+      <div class="form-field">
+        <label for="fechafin">Fecha de Fin Real</label>
+        <input id="fechafin" type="date" pInputText
+          [ngModel]="seguimientoEditando ? formatDate(seguimientoEditando.fechafin) : formatDate(nuevoSeguimiento.fechafin)"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.fechafin = $event : nuevoSeguimiento.fechafin = $event"
+          name="fechafin" required class="input-field">
+      </div>
+
+      <div class="form-field">
+        <label for="pasosid">Pasos</label>
+        <select id="pasosid" [ngModel]="seguimientoEditando ? seguimientoEditando.pasosid : nuevoSeguimiento.pasosid"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.pasosid = $event : nuevoSeguimiento.pasosid = $event"
+          name="pasosid" required class="input-field">
+          <option *ngFor="let cont of pasos" [value]="cont.id">{{ cont.nivel }}</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="proyectoid">Proyecto</label>
+        <select id="proyectoid"
+          [ngModel]="seguimientoEditando ? seguimientoEditando.proyectoid : nuevoSeguimiento.proyectoid"
+          (ngModelChange)="seguimientoEditando ? seguimientoEditando.proyectoid = $event : nuevoSeguimiento.proyectoid = $event"
+          name="proyectoid" required class="input-field">
+          <option *ngFor="let cont of proyecto" [value]="cont.id">{{ cont.proyecto }}</option>
+        </select>
+      </div>
+    </div>
+
+    <button pButton type="submit" label="{{ seguimientoEditando ? 'Actualizar' : 'Guardar' }}"
+      class="p-button-success p-button-outlined boton-redondo m-2"></button>
+  </form>
+</p-dialog>
+
 <p>pepito paez es Dios reencarnado </p>

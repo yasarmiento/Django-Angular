@@ -28,8 +28,8 @@ export class ProyectosService {
     return this.http.post(`${base}`, data);
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${base}/${id}`, data);
+  update(data: any): Observable<any> {
+    return this.http.put(`${base}/${data.id}`, data);
   }  
 
   delete(id: any): Observable<any> {

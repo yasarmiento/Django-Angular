@@ -68,12 +68,6 @@ export class ProyectosComponent {
 
   ngOnInit() {
     this.retrieveProyectos();
-    this.http.get("http://127.0.0.1:8000/proyectos")
-      .subscribe(
-        proyecto => {
-          this.pro = proyecto;
-        }
-      );
     this.obtenerDatos();
   }
 
@@ -121,35 +115,20 @@ export class ProyectosComponent {
   }
 
   crearProyecto(): void {
-    if (this.editMode && this.editingProyecto != null) {
-      const data = new FormData();
-      console.log(this.editingProyecto)
-      data.append('proyecto', this.editingProyecto.proyecto);
-      data.append('codigo', this.editingProyecto.codigo);
-      data.append('plazo', this.editingProyecto.plazo.toString());
-      const formattedFechaI = this.formatDate(this.editingProyecto.fechai);
-      data.append('fechai', formattedFechaI);
-      const formattedFechaF = this.formatDate(this.editingProyecto.fechaf);
-      data.append('fechaf', formattedFechaF);
-      data.append('convocatoriaid', this.editingProyecto.convocatoriaid.toString());
-      data.append('roluniversidadid', this.editingProyecto.roluniversidadid.toString());
-      data.append('operadorid', this.editingProyecto.operadorid.toString());
-      data.append('entidadfinanciadora', this.editingProyecto.entidadfinanciadora);
-      data.append('grupoinvestigacionid', this.editingProyecto.grupoinvestigacionid.toString());
-
-      console.log("datos para editar: ", data)
-      
-      this.proyectoService.update(this.editingProyecto.id, data).subscribe(() => {
-        console.log("Proyecto editado con exito ")
-        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto editado con éxito' });
-        this.refreshList();
-        this.CerrarDialog();
-      }, (error) => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo editar el proyecto' });
-      });
-
+    if (this.editMode) {
+      // Estás en modo de edición, por lo que actualiza el proyecto existente
+      console.log("editando el proyecto ", this.editingProyecto)
+      this.proyectoService.update(this.editingProyecto).subscribe(
+        () => {
+          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto actualizado con éxito'});
+          this.refreshList();
+          this.CerrarDialog();
+        },
+        (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo actualizar el proyecto'});
+        }
+      );
     } else {
-      // Modo de creación (tu código existente)
       console.log("Creando un proyecto")
       this.proyectoService.create(this.crearProyectosI).subscribe(() => {
         this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto creado con éxito' });
@@ -159,11 +138,11 @@ export class ProyectosComponent {
       }, (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo crear el proyecto' });
       });
+
+      this.editMode = false; // Restablecer el modo de edición
     }
-    this.editMode = false; // Restablecer el modo de edición
   }
-  
-  
+
   formatDate(date: Date): string {
     if (date instanceof Date) {
       const year = date.getFullYear();
