@@ -6,7 +6,6 @@ export interface SeguimientosI {
     diasdependencia : number;
     tipodependenciaid : any;
     inicio : Date;
-    fin : Date;
     estadoid : any;
     responsable : string;
     fechafin : Date;

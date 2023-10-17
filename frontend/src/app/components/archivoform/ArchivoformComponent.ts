@@ -12,6 +12,8 @@ import { MessageService } from 'primeng/api';
 })
 export class ArchivoformComponent implements OnInit {
 
+  uploadButtonDisabled: boolean = true;
+
   archivos: any;
   archivo?: TipoarchivoI[];
   visible: boolean = false;

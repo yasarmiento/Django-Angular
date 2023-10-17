@@ -27,7 +27,6 @@ export class SeguimientosComponent {
     diasdependencia: 0,
     tipodependenciaid: null,
     inicio: new Date(),
-    fin: new Date(),
     estadoid: null,
     responsable: '',
     fechafin: new Date(),
@@ -57,12 +56,11 @@ export class SeguimientosComponent {
       data.append('diasdependencia', this.seguimientoEditando.diasdependencia.toString());
       data.append('tipodependenciaid', this.seguimientoEditando.tipodependenciaid);
       data.append('inicio', this.seguimientoEditando.inicio.toString());
-      data.append('fin', this.seguimientoEditando.fin.toString());
-      data.append('estadoid', this.seguimientoEditando.estadoid.toString());
+      data.append('estadoid', this.seguimientoEditando.estadoid);
       data.append('responsable', this.seguimientoEditando.responsable);
       data.append('fechafin', this.seguimientoEditando.fechafin.toString());
-      data.append('pasosid', this.seguimientoEditando.pasosid.toString());
-      data.append('proyectoid', this.seguimientoEditando.proyectoid.toString());
+      data.append('pasosid', this.seguimientoEditando.pasosid);
+      data.append('proyectoid', this.seguimientoEditando.proyectoid);
 
       // Estás editando un seguimiento existente
       this.seguimientoService.update(this.seguimientoEditando.id, this.seguimientoEditando).subscribe(
@@ -173,5 +171,7 @@ export class SeguimientosComponent {
     }
     return '';
   }
+
+  
 
 }

@@ -6,7 +6,8 @@
     <button pButton (click)="showDialog()" icon="pi pi-plus" label="Subir Nuevo Archivo"
       class="p-button-primary m-2 p-button-outlined boton-redondo"></button>
     <br>
-    <p-table [value]="archivos" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" class="p-datatable-striped custom-table">
+    <p-table [value]="archivos" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+      class="p-datatable-striped custom-table">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th>#</th>
@@ -28,8 +29,8 @@
           </td>
           <td>{{ obtenerNombresProyectos(rowData.proyectoid) }}</td>
           <td>
-            <button pButton type="button" label="Editar" icon="pi pi-pencil" class="p-button-warning p-button-outlined boton-redondo"
-              (click)="editArchivo(rowData)"></button>
+            <button pButton type="button" label="Editar" icon="pi pi-pencil"
+              class="p-button-warning p-button-outlined boton-redondo" (click)="editArchivo(rowData)"></button>
           </td>
         </tr>
       </ng-template>
@@ -58,7 +59,8 @@
 
         <div class="form-group">
           <label for="archivo">Archivo:</label>
-          <p-fileUpload name="archivo" (onSelect)="onFileSelect($event)" [maxFileSize]="1000000" [customUpload]="true">
+          <p-fileUpload name="archivo" (onSelect)="onFileSelect($event)" [maxFileSize]="1000000" [customUpload]="true"
+            [chooseLabel]="'Seleccionar Archivo'" [cancelLabel]="'Cancelar'" [showUploadButton]="false">
           </p-fileUpload>
           <label>Archivo cargado: </label>
           <p>{{ archivoNombre }}</p>
@@ -67,10 +69,10 @@
 
         <div class="form-field" style=" width: 100%">
           <label for="archivo">Seleccionar el Proyecto del archivo</label>
-            <p>
-              <p-dropdown id="proyecto" name="proyecto" [(ngModel)]="archivosCrear.proyectoid" [options]="proyectos"
-                optionLabel="proyecto" placeholder="Seleccionar" optionValue="id" ></p-dropdown>
-            </p>
+          <p>
+            <p-dropdown id="proyecto" name="proyecto" [(ngModel)]="archivosCrear.proyectoid" [options]="proyectos"
+              optionLabel="proyecto" placeholder="Seleccionar" optionValue="id"></p-dropdown>
+          </p>
         </div>
 
         <button type="submit" pButton class="p-button-primary" label="Guardar"></button>

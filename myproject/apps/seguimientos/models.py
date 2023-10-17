@@ -30,7 +30,7 @@ class Seguimientos (models.Model):
     diasdependencia = models.IntegerField(blank=True, null=True)
     tipodependenciaid = models.ForeignKey(Tipodependencia, on_delete=models.CASCADE, null=True, blank=True)
     inicio = models.DateField()
-    fin = models.DateField()
+    fin = models.DateField(null=True, blank=True)
     responsable = models.CharField(max_length=40)
     fechafin = models.DateField()
     estadoid = models.ForeignKey(Estado, on_delete=models.CASCADE, null=True, blank=True)
@@ -39,3 +39,11 @@ class Seguimientos (models.Model):
 
     def __str__(self):
         return self.descripciontarea
+
+    def save(self, *args, **kwargs):
+        # Verificar si ya tienes un valor en el campo "inicio"
+        if self.inicio and self.duracion:
+            # Sumar la duración a la fecha de inicio
+            from datetime import timedelta
+            self.fin = self.inicio + timedelta(days=self.duracion)
+        super(Seguimientos, self).save(*args, **kwargs)
