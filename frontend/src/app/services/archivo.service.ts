@@ -13,7 +13,7 @@ export class ArchivoService {
 
   constructor(private http:HttpClient) { }
 
-  getAll(): Observable<ArchivoI[]>{
+  getAarchivos(): Observable<ArchivoI[]>{
     return this.http.get<ArchivoI[]>(baseUrl);
   }
 
@@ -38,7 +38,7 @@ export class ArchivoService {
   }
   
   getProyectos(): Observable<any[]> {
-    return this.http.get<any[]>(`${base}`);
+    return this.http.get<any[]>(`${base}/proyectos`);
   }
 
 }

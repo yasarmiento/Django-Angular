@@ -164,7 +164,7 @@
 <p-dialog header="{{ seguimientoEditando ? 'Editar Seguimiento' : 'Crear Seguimiento' }}" [(visible)]="displayDialog"
   [modal]="true" [responsive]="true">
   <form (ngSubmit)="guardarSeguimiento()" class="form-container">
-    <div class="p-fluid">
+    <div>
       <div class="form-field">
         <label for="descripciontarea">Descripción de Tarea</label>
         <input type="text" id="descripciontarea"

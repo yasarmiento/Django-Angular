@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProyectosI } from '../models/proyectos.model';
+import { SeguimientosI } from '../models/seguimientos.models';
 
 const base = 'http://127.0.0.1:8000/proyectos'
+const baseSeg ='http://127.0.0.1:8000/seguimientos'
 const baseUrl = 'http://127.0.0.1:8000/'
 
 
@@ -52,6 +54,15 @@ export class ProyectosService {
   }
   getGrupoInvestigacion(): Observable<any[]> {
     return this.http.get<any[]>(`${baseUrl}/grupos_investigacion`);
+  }
+
+  guardarCambios(proyectoEditado: ProyectosI): Observable<ProyectosI> {
+    const url = `${base}/${proyectoEditado.id}`;
+    return this.http.put<ProyectosI>(url, proyectoEditado);
+  }
+
+  getSeguimientos(): Observable<SeguimientosI[]> {
+    return this.http.get<SeguimientosI[]>(baseSeg);
   }
 
 }

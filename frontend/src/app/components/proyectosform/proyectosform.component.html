@@ -1,0 +1,189 @@
+<div class="container m-2">
+    <div *ngIf="proyectosform" class="project-details">
+        <h2 class="project-title"> <strong> Detalles del Proyecto </strong></h2>
+        <ul class="project-info-list">
+            <li><strong>Nombre del Proyecto:</strong> {{ proyectosform.proyecto }}</li>
+            <li><strong>Código del Proyecto:</strong> {{ proyectosform.codigo }}</li>
+            <li><strong>Plazo (Meses):</strong> {{ proyectosform.plazo }}</li>
+            <li><strong>Fecha de Inicio:</strong> {{ proyectosform.fechai | date: 'yyyy-MM-dd' }}</li>
+            <li><strong>Fecha de Fin:</strong> {{ proyectosform.fechaf | date: 'yyyy-MM-dd' }}</li>
+            <li><strong>Convocatoria:</strong> {{ obtenerConvocatoriaNombre(proyectosform.convocatoriaid) }}</li>
+            <li><strong>Rol Universidad:</strong> {{ obtenerRolU(proyectosform.roluniversidadid) }}</li>
+            <li><strong>Operador:</strong> {{ obtenerOperadorNombre(proyectosform.operadorid) }}</li>
+            <li><strong>Entidad Financiadora:</strong> {{ obtenerEntidadF(proyectosform.entidadfinanciadora) }}</li>
+            <li><strong>Grupo de Investigación:</strong> {{ obtenerGrupoI(proyectosform.grupoinvestigacionid) }}</li>
+        </ul>
+        <button pButton class="p-button-info p-button-outlined boton-redondo mr-2" icon="pi pi-pencil" label="Editar"
+            (click)="editProyecto(proyectosform)"></button>
+        <button pButton (click)="archivoVisible()" pButton icon="pi pi-file" label="Archivos"
+            class="boton-redondo p-button-warning p-button-outlined"></button>
+
+    </div>
+</div>
+
+<div class="container m-2">
+    <div class="project-details">
+        <p-card header="Seguimientos">
+            <div style="text-align: center">
+                <p-table [value]="seguimientosProyecto" [paginator]="true" [rows]="10" [columns]="seguimientosProyecto"
+                    class="custom-table">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr class="custom-header">
+                            <th>Id</th>
+                            <th>Tarea</th>
+                            <th>Duración</th>
+                            <th>Tarea Anterior</th>
+                            <th>Dias dependencia</th>
+                            <th>Tipo de Dependencia</th>
+                            <th>Inicio</th>
+                            <th>Fin</th>
+                            <th>Estado</th>
+                            <th>Responsable</th>
+                            <th>Fecha de Fin</th>
+                            <th>Pasos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td>{{rowData.id}}</td>
+                            <td>{{rowData.descripciontarea}}</td>
+                            <td>{{rowData.duracion}}</td>
+                            <td>{{ obtenerTareaAnterior(rowData.tarea_anterior) }}</td>
+                            <td>{{rowData.diasdependencia}}</td>
+                            <td>{{ obtenerTipoDependencia(rowData.tipodependenciaid)}}</td>
+                            <td>{{rowData.inicio}}</td>
+                            <td>{{rowData.fin}}</td>
+                            <td>{{ obtenerEstado(rowData.estadoid) }}</td>
+                            <td>{{rowData.responsable}}</td>
+                            <td>{{rowData.fechafin}}</td>
+                            <td>{{ obtenerPasos(rowData.pasosid) }}</td>
+
+                            <td>
+                                <button pButton type="button" label="Editar" icon="pi pi-pencil"
+                                    class="p-button-warning m-2 p-button-outlined boton-redondo"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-card>
+    </div>
+</div>
+<p-dialog header="Formulario" [(visible)]="visible" [modal]="true" [responsive]="true"
+    [style]="{width: 'width', minWidth: 'minWidth'}">
+    <div>
+        <form (ngSubmit)="guardarCambios()" class="form-container">
+            <div class="form-field">
+                <label for="proyecto">Nombre del Proyecto</label>
+                <input type="text" id="proyecto" [(ngModel)]="proyectoEditado.proyecto" name="proyecto" required
+                    class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="codigo">Código del Proyecto</label>
+                <input type="text" id="codigo" [(ngModel)]="proyectoEditado.codigo" name="codigo" required
+                    class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="plazo">Plazo</label>
+                <input type="number" id="plazo" [(ngModel)]="proyectoEditado.plazo" name="plazo" required
+                    class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="fechai">Fecha de Inicio</label>
+                <input type="date" id="fechai" [ngModel]="formatDate(proyectoEditado.fechai)"
+                    (ngModelChange)="proyectoEditado.fechai = $event" name="fechai" required class="input-field">
+            </div>
+
+
+            <div class="form-field">
+                <label for="fechaf">Fecha de Fin</label>
+                <input type="date" id="fechaf" [ngModel]="formatDate(proyectoEditado.fechaf)"
+                    (ngModelChange)="proyectoEditado.fechaf = $event" name="fechaf" required class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="convocatoria">Convocatoria</label>
+                <select id="convocatoria" [(ngModel)]="proyectoEditado.convocatoriaid" name="convocatoria" required
+                    class="input-field">
+                    <option *ngFor="let convocatoria of convocatoriaNombre" [value]="convocatoria.id">{{
+                        convocatoria.convocatoria
+                        }}</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="rolUniversidad">Rol Universidad</label>
+                <select id="rolUniversidad" [(ngModel)]="proyectoEditado.roluniversidadid" name="rolUniversidad"
+                    required class="input-field">
+                    <option *ngFor="let rol of rolU" [value]="rol.id">{{ rol.rolU }}</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="operador">Operador</label>
+                <select id="operador" [(ngModel)]="proyectoEditado.operadorid" name="operador" required
+                    class="input-field">
+                    <option *ngFor="let operador of operadorNombre" [value]="operador.id">{{ operador.operador }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="entidadFinanciadora">Entidad Financiadora</label>
+                <select id="entidadFinanciadora" [(ngModel)]="proyectoEditado.entidadfinanciadora"
+                    name="entidadFinanciadora" required class="input-field">
+                    <option *ngFor="let entidad of entidadFNombre" [value]="entidad.id">{{ entidad.entidadfinanciadora
+                        }}</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="grupoInvestigacion">Grupo de Investigación</label>
+                <select id="grupoInvestigacion" [(ngModel)]="proyectoEditado.grupoinvestigacionid"
+                    name="grupoInvestigacion" required class="input-field">
+                    <option *ngFor="let grupo of grupoINombre" [value]="grupo.id">{{ grupo.grupoinvestigacion }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button pButton class="p-button-info p-button-outlined boton-redondo mr-2" type="submit">Guardar
+                    Cambios</button>
+                <button pButton class="p-button-danger p-button-outlined boton-redondo" type="button"
+                    (click)="CerrarDialog()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</p-dialog>
+<p-dialog header="ArchivosProyecto" [(visible)]="archivosProyecto" [modal]="true" [responsive]="true"
+    [style]="{width: 'width', minWidth: 'minWidth'}">
+
+    <p-table [value]="archivosProyectos" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+        class="p-datatable-striped custom-table">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th>#</th>
+                <th pSortableColumn="nombre_archivo_id">Tipo de Archivo <p-sortIcon
+                        field="nombre_archivo_id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="archivo">Nombre del Archivo <p-sortIcon field="archivo"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+            <tr>
+                <td>{{ rowIndex + 1 }}</td>
+                <td>{{ obtenerNombresArchivos(rowData.nombre_archivo_id) }}</td>
+                <td class="file-cell">
+                    <a [href]="rowData.archivo" target="_blank" class="file-link">
+                        <span class="pi pi-file"></span> {{ getFileName(rowData.archivo) }}
+                    </a>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-dialog>

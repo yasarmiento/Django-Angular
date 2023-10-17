@@ -42,21 +42,19 @@
 
 <p-dialog header="Agregar un Nuevo Archivo" [(visible)]="visible" [style]="{width: '50vw'}">
   <div>
-    <div class="container">
+    <div class="form-container">
       <form (ngSubmit)="saveArchivo()" #archivoForm="ngForm" enctype="multipart/form-data">
+        <div class="p-fluid">
 
-        <p-card header="Seleccione el documento relacionado:" [style]="{ width: '100%' }" class="m-2">
-          <ng-template pTemplate="header">
-          </ng-template>
+        </div>
+        <div class="form-field">
+          <label for="archivo">Seleccionar el Nombre del Archivo</label>
           <p>
             <p-dropdown id="nombresArchivos" name="nombresArchivos" [(ngModel)]="archivosCrear.nombre_archivo_id"
               [options]="nombresArchivos" optionLabel="nombre_archivo" optionValue="id"
               placeholder="Seleccionar"></p-dropdown>
           </p>
-          <ng-template pTemplate="footer">
-            <!--<p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>-->
-          </ng-template>
-        </p-card>
+        </div>
 
         <div class="form-group">
           <label for="archivo">Archivo:</label>
@@ -67,21 +65,12 @@
 
         </div>
 
-        <div class="form-group mt-2" style=" width: 100%">
-
-          <p-card header="Seleccione proyecto al cual cargar el documento" [style]="{ width: '100%' }" class="m-2">
-            <ng-template pTemplate="header">
-            </ng-template>
-            <p>
-            </p>
+        <div class="form-field" style=" width: 100%">
+          <label for="archivo">Seleccionar el Proyecto del archivo</label>
             <p>
               <p-dropdown id="proyecto" name="proyecto" [(ngModel)]="archivosCrear.proyectoid" [options]="proyectos"
-                optionLabel="proyecto" placeholder="Seleccionar" optionValue="id"></p-dropdown>
+                optionLabel="proyecto" placeholder="Seleccionar" optionValue="id" ></p-dropdown>
             </p>
-            <ng-template pTemplate="footer">
-              <!--<p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>-->
-            </ng-template>
-          </p-card>
         </div>
 
         <button type="submit" pButton class="p-button-primary" label="Guardar"></button>

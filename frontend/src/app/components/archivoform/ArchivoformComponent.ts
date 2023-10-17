@@ -48,7 +48,7 @@ export class ArchivoformComponent implements OnInit {
   }
 
   retrieveArchivo(): void {
-    this.archivoService.getAll()
+    this.archivoService.getAarchivos()
       .subscribe({
         next: (data) => {
           this.archivos = data;

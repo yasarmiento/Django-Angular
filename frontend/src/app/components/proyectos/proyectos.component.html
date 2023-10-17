@@ -8,16 +8,13 @@
           class="custom-table">
           <ng-template pTemplate="header" let-columns>
             <tr class="custom-header">
-              <th>Id</th>
+              <th>#</th>
               <th pSortableColumn="proyecto">Proyecto<p-sortIcon field="proyecto"></p-sortIcon></th>
-              <th>Codigo</th>
-              <th pSortableColumn="plazo">Plazo<p-sortIcon field="plazo"></p-sortIcon></th>
+              <th pSortableColumn="plazo">Plazo (Meses)<p-sortIcon field="plazo"></p-sortIcon></th>
               <th>Rol Universidad</th>
               <th>Fecha de inicio</th>
               <th>Fecha de fin</th>
               <th>Convocatoria</th>
-              <th>Operador</th>
-              <th>Entidad Financiadora</th>
               <th>Grupo de Investigación</th>
               <th>Detalles</th>
             </tr>
@@ -26,18 +23,17 @@
             <tr>
               <td>{{rowIndex + 1 }}</td>
               <td>{{rowData.proyecto}}</td>
-              <td>{{rowData.codigo}}</td>
               <td>{{rowData.plazo}}</td>
               <td>{{ obtenerRolU(rowData.roluniversidadid) }}</td>
               <td>{{rowData.fechai}}</td>
               <td>{{rowData.fechaf}}</td>
               <td>{{ obtenerConvocatoriaNombre(rowData.convocatoriaid) }}</td>
-              <td>{{ obtenerOperadorNombre(rowData.operadorid) }}</td>
-              <td>{{ obtenerEntidadF(rowData.entidadfinanciadora) }}</td>
               <td>{{ obtenerGrupoI(rowData.grupoinvestigacionid) }}</td>
               <td>
                 <button pButton class="p-button-warning p-button-outlined boton-redondo" label="Editar"
                   icon="pi pi-pencil" (click)="editProyecto(rowData, rowIndex)"></button>
+                <button pButton class="p-button-info p-button-outlined boton-redondo" label="Detalles" icon="pi pi-info"
+                  [routerLink]="['/proyectosform', rowData.id]"></button>
               </td>
             </tr>
           </ng-template>
@@ -54,22 +50,22 @@
       <div class="form-field">
         <label for="proyecto">Nombre del Proyecto</label>
         <input type="text" id="proyecto" [ngModel]="editMode ? editingProyecto.proyecto : crearProyectosI.proyecto"
-        (ngModelChange)="editMode ? editingProyecto.proyecto = $event : crearProyectosI.proyecto = $event" 
+          (ngModelChange)="editMode ? editingProyecto.proyecto = $event : crearProyectosI.proyecto = $event"
           name="proyecto" required class="input-field">
       </div>
 
       <div class="form-field">
         <label for="codigo">Código del Proyecto</label>
         <input type="text" id="codigo" [ngModel]="editMode ? editingProyecto.codigo : crearProyectosI.codigo"
-        (ngModelChange)="editMode ? editingProyecto.codigo = $event : crearProyectosI.codigo = $event" 
-          name="codigo" required class="input-field">
+          (ngModelChange)="editMode ? editingProyecto.codigo = $event : crearProyectosI.codigo = $event" name="codigo"
+          required class="input-field">
       </div>
 
       <div class="form-field">
         <label for="plazo">Plazo</label>
         <input type="number" id="plazo" [ngModel]="editMode ? editingProyecto.plazo : crearProyectosI.plazo"
-        (ngModelChange)="editMode ? editingProyecto.plazo = $event : crearProyectosI.plazo = $event" 
-          name="plazo" required class="input-field">
+          (ngModelChange)="editMode ? editingProyecto.plazo = $event : crearProyectosI.plazo = $event" name="plazo"
+          required class="input-field">
       </div>
 
       <div class="form-field">
@@ -91,10 +87,9 @@
 
       <div class="form-field">
         <label for="convocatoria">Convocatoria</label>
-        <select id="convocatoria"
-          [ngModel]="editMode ? editingProyecto.convocatoriaid : crearProyectosI.convocatoriaid"
-          (ngModelChange)="editMode ? editingProyecto.convocatoriaid = $event : crearProyectosI.convocatoriaid = $event" name="convocatoria"
-          required class="input-field">
+        <select id="convocatoria" [ngModel]="editMode ? editingProyecto.convocatoriaid : crearProyectosI.convocatoriaid"
+          (ngModelChange)="editMode ? editingProyecto.convocatoriaid = $event : crearProyectosI.convocatoriaid = $event"
+          name="convocatoria" required class="input-field">
           <option *ngFor="let convocatoria of convocatoriaNombre" [value]="convocatoria.id">{{ convocatoria.convocatoria
             }}</option>
         </select>
@@ -104,7 +99,7 @@
         <label for="rolUniversidad">Rol Universidad</label>
         <select id="rolUniversidad"
           [ngModel]="editMode ? editingProyecto.roluniversidadid : crearProyectosI.roluniversidadid"
-          (ngModelChange)="editMode ? editingProyecto.roluniversidadid = $event : crearProyectosI.roluniversidadid = $event"           
+          (ngModelChange)="editMode ? editingProyecto.roluniversidadid = $event : crearProyectosI.roluniversidadid = $event"
           name="rolUniversidad" required class="input-field">
           <option *ngFor="let rol of rolU" [value]="rol.id">{{ rol.rolU }}</option>
         </select>
@@ -113,7 +108,7 @@
       <div class="form-field">
         <label for="operador">Operador</label>
         <select id="operador" [ngModel]="editMode ? editingProyecto.operadorid : crearProyectosI.operadorid"
-        (ngModelChange)="editMode ? editingProyecto.operadorid = $event : crearProyectosI.operadorid = $event" 
+          (ngModelChange)="editMode ? editingProyecto.operadorid = $event : crearProyectosI.operadorid = $event"
           name="operador" required class="input-field">
           <option *ngFor="let operador of operadorNombre" [value]="operador.id">{{ operador.operador }}</option>
         </select>
@@ -123,7 +118,7 @@
         <label for="entidadFinanciadora">Entidad Financiadora</label>
         <select id="entidadFinanciadora"
           [ngModel]="editMode ? editingProyecto.entidadfinanciadora : crearProyectosI.entidadfinanciadora"
-          (ngModelChange)="editMode ? editingProyecto.entidadfinanciadora = $event : crearProyectosI.entidadfinanciadora = $event" 
+          (ngModelChange)="editMode ? editingProyecto.entidadfinanciadora = $event : crearProyectosI.entidadfinanciadora = $event"
           name="entidadFinanciadora" required class="input-field">
           <option *ngFor="let entidad of entidadFNombre" [value]="entidad.id">{{ entidad.entidadfinanciadora }}</option>
         </select>
@@ -133,7 +128,7 @@
         <label for="grupoInvestigacion">Grupo de Investigación</label>
         <select id="grupoInvestigacion"
           [ngModel]="editMode ? editingProyecto.grupoinvestigacionid : crearProyectosI.grupoinvestigacionid"
-          (ngModelChange)="editMode ? editingProyecto.grupoinvestigacionid = $event : crearProyectosI.grupoinvestigacionid = $event" 
+          (ngModelChange)="editMode ? editingProyecto.grupoinvestigacionid = $event : crearProyectosI.grupoinvestigacionid = $event"
           name="grupoInvestigacion" required class="input-field">
           <option *ngFor="let grupo of grupoINombre" [value]="grupo.id">{{ grupo.grupoinvestigacion }}</option>
         </select>

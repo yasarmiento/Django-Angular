@@ -120,12 +120,12 @@ export class ProyectosComponent {
       console.log("editando el proyecto ", this.editingProyecto)
       this.proyectoService.update(this.editingProyecto).subscribe(
         () => {
-          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto actualizado con éxito'});
+          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Proyecto actualizado con éxito' });
           this.refreshList();
           this.CerrarDialog();
         },
         (error) => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo actualizar el proyecto'});
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo actualizar el proyecto' });
         }
       );
     } else {

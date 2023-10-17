@@ -27,20 +27,6 @@
   background-color: #e0e0e0; /* Fondo al pasar el ratón */
 }
 
-/* Estilo para el botón de "Editar" */
-.p-button-success {
-  background-color: #28a745; /* Color de fondo del botón */
-  color: white; /* Color del texto del botón */
-  border: none; /* Sin borde */
-  padding: 5px 10px; /* Espaciado interno */
-  cursor: pointer; /* Cambio de cursor al pasar el ratón */
-  border-radius: 5px; /* Borde redondeado */
-}
-
-/* Estilo para el botón de "Editar" al pasar el ratón sobre él */
-.p-button-success:hover {
-  background-color: #218838; /* Cambio de color al pasar el ratón */
-}
 
 /* Estilo para el enlace del archivo */
 .custom-table a {
@@ -71,4 +57,27 @@
 .file-link {
   text-decoration: none; /* Sin subrayado para los enlaces de archivos */
   color: #007bff; /* Color del enlace */
+}
+
+.container {
+  margin: 20px;
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+/* Estilos para etiquetas */
+.form-field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.form-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }

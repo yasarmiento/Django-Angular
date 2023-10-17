@@ -15,7 +15,7 @@ export class SeguimientosService {
     private http: HttpClient
   ) { }
 
-  getAll(): Observable<SeguimientosI[]> {
+  getSeg(): Observable<SeguimientosI[]> {
     return this.http.get<SeguimientosI[]>(base);
   }
 
@@ -34,7 +34,6 @@ export class SeguimientosService {
   delete(id: any): Observable<any> {
     return this.http.delete(`${base}/${id}`);
   }
-
 
   getEstado(): Observable<any[]> {
     return this.http.get<any[]>(`${baseUrl}/estados`);

@@ -22,6 +22,7 @@ import { ArchivoaddComponent } from './components/archivoadd/archivoadd.componen
 import { ArchivoformComponent } from './components/archivoform/ArchivoformComponent';
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'proyectos', pathMatch: 'full' },
   { path: 'proyectos', component: ProyectosComponent },

@@ -104,7 +104,7 @@ export class SeguimientosComponent {
 
 
   obtenerSeguimientos(): void {
-    this.seguimientoService.getAll()
+    this.seguimientoService.getSeg()
       .subscribe({
         next: (data) => {
           this.seguimientos = data;
