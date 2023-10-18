@@ -21,6 +21,10 @@ export class ProyectosformComponent implements OnInit {
 
   seguimientosProyecto: SeguimientosI[] = [];
 
+  seguimientoEditando: SeguimientosI | null = null;
+
+  displayDialog = false;
+
   archivos: ArchivoI[] = [];
   archivosProyectos: ArchivoI[] = [];
 
@@ -71,12 +75,26 @@ export class ProyectosformComponent implements OnInit {
     grupoinvestigacionid: '',
   };
 
+  nuevoSeguimiento: SeguimientosI = {
+    descripciontarea: '',
+    duracion: 0,
+    tarea_anterior: null,
+    diasdependencia: 0,
+    tipodependenciaid: null,
+    inicio: new Date(),
+    estadoid: null,
+    responsable: '',
+    fechafin: new Date(),
+    pasosid: null,
+    proyectoid: null,
+  };
+
   archivosProyecto: boolean = false;
 
   constructor(
-    private route: ActivatedRoute, 
-    private proyectoService: ProyectosService, 
-    private seguimientoService: SeguimientosService, 
+    private route: ActivatedRoute,
+    private proyectoService: ProyectosService,
+    private seguimientoService: SeguimientosService,
     private messageService: MessageService,
     private archivoService: ArchivoService) { }
 
@@ -90,10 +108,11 @@ export class ProyectosformComponent implements OnInit {
         .subscribe(proyecto => {
           this.proyectosform = proyecto;
           this.seguimientosProyecto = this.seguimientos.filter(seguimiento => seguimiento.proyectoid === proyectoId);
-          this.archivosProyectos = this.archivos.filter(archivos => archivos.proyectoid === proyectoId) 
+          this.archivosProyectos = this.archivos.filter(archivos => archivos.proyectoid === proyectoId)
         });
     });
   }
+
 
   obtenerSeguimientos(): void {
     this.seguimientoService.getSeg()
@@ -105,6 +124,26 @@ export class ProyectosformComponent implements OnInit {
         error: (e) => console.error(e)
       });
   }
+
+  obtenerTareasAnteriores() {
+
+  }
+
+  obtenerSeguimientoss(): void {
+    this.route.params.subscribe(params => {
+      const proyectoId = +params['id']; // Obtiene el ID del proyecto desde la URL
+
+      this.seguimientoService.getSeg() // Crea un método en tu servicio para cargar seguimientos por proyecto
+        .subscribe({
+          next: (data) => {
+            this.seguimientos = data;
+            console.log(data);
+          },
+          error: (e) => console.error(e)
+        });
+    });
+  }
+
 
   obtenerArchivos(): void {
     this.archivoService.getAarchivos()
@@ -144,13 +183,81 @@ export class ProyectosformComponent implements OnInit {
     );
   }
 
-  archivoVisible(){
+  guardarSeguimiento() {
+    console.log("Guardar Seguimientos...");
+    if (this.seguimientoEditando != null) {
+      const data = new FormData();
+      console.log(this.seguimientoEditando)
+      data.append('descripciontarea', this.seguimientoEditando.descripciontarea);
+      data.append('duracion', this.seguimientoEditando.duracion.toString());
+      data.append('tarea_anterior', this.seguimientoEditando.tarea_anterior);
+      data.append('diasdependencia', this.seguimientoEditando.diasdependencia.toString());
+      data.append('tipodependenciaid', this.seguimientoEditando.tipodependenciaid);
+      data.append('inicio', this.seguimientoEditando.inicio.toString());
+      data.append('estadoid', this.seguimientoEditando.estadoid);
+      data.append('responsable', this.seguimientoEditando.responsable);
+      data.append('fechafin', this.seguimientoEditando.fechafin.toString());
+      data.append('pasosid', this.seguimientoEditando.pasosid);
+      data.append('proyectoid', this.seguimientoEditando.proyectoid);
+      // Estás editando un seguimiento existente
+      this.seguimientoService.update(this.seguimientoEditando.id, this.seguimientoEditando).subscribe(
+        (response) => {
+          // La actualización se realizó con éxito
+          this.cerrarDialog();
+          this.obtenerSeguimientos();
+        },
+        (error) => {
+          // Maneja errores de actualización, muestra un mensaje de error o realiza acciones adecuadas.
+          console.error(error);
+        }
+      );
+
+    } else {// Estás creando un nuevo seguimiento
+      if (this.proyectosform) {
+        this.nuevoSeguimiento.proyectoid = this.proyectosform.id; // Asigna el ID del proyecto desde la URL
+        console.log("Creando", this.nuevoSeguimiento);
+
+        this.seguimientoService.create(this.nuevoSeguimiento).subscribe(
+          (response) => {
+            // El seguimiento se creó con éxito, puedes manejar aquí una redirección o una actualización de la lista de seguimientos.
+            this.obtenerSeguimientos();
+            this.cerrarDialog();
+          },
+          (error) => {
+            // Maneja errores de creación, muestra un mensaje de error o realiza acciones adecuadas.
+            console.error(error);
+          }
+        );
+      } else {
+        console.error("proyectosform es undefined. Asegúrate de que se haya inicializado correctamente.");
+      }
+    }
+    this.seguimientoEditando = null; // Reinicializa la variable de edición
+          setTimeout(() => {
+            location.reload();
+          }, 500); // Espera 1/2 seguNdo antes de recargar la página
+  }
+
+  editarSeguimiento(seguimiento: SeguimientosI) {
+    // Asigna el seguimiento que se va a editar a la variable seguimientoEditando
+    this.seguimientoEditando = { ...seguimiento };
+    this.displayDialog = true;
+    console.log("Datos del seguimiento a editar:", this.seguimientoEditando);
+  }
+
+
+  archivoVisible() {
     this.archivosProyecto = true;
   }
+
   editProyecto(proyecto: ProyectosI) {
     this.proyectoEditado = { ...proyecto }; // Clonar el proyecto para no modificar el original directamen
     this.visible = true; // Mostrar el diálogo de creación/edición
     console.log("Editando: ", this.proyectoEditado)
+  }
+
+  cerrarDialog() {
+    this.displayDialog = false;
   }
 
   formatDate(date: Date): string {
@@ -169,6 +276,10 @@ export class ProyectosformComponent implements OnInit {
       return parts[parts.length - 1];
     }
     return '';
+  }
+
+  mostrarDialog() {
+    this.displayDialog = true;
   }
 
   obtenerDatos(): void {
@@ -209,7 +320,7 @@ export class ProyectosformComponent implements OnInit {
 
   }
 
-  obtenerNombresArchivos(archivoId: number){
+  obtenerNombresArchivos(archivoId: number) {
     const archivo = this.nombresArchivos.find(r => r.id === archivoId);
     return archivo ? `${archivo.nombre_archivo}` : 'archivo no encontrado'
   }
@@ -251,9 +362,12 @@ export class ProyectosformComponent implements OnInit {
     return proyecto ? `${proyecto.proyecto}` : 'Proyecto no encontrado'
   }
   obtenerTareaAnterior(tareaid: number) {
-    const proyecto = this.tareaAnterior.find(r => r.id === tareaid);
-    return proyecto ? `${proyecto.descripciontarea}` : 'No Aplica'
+    // Filtra las tareas anteriores por el proyecto ID
+    const tareaa = this.tareaAnterior.find(r => r.id === tareaid);
+    return tareaa ? `${tareaa.descripciontarea}` : 'No Aplica';
+
   }
+
   obtenerTipoDependencia(tipoDependenciaid: number) {
     const td = this.tipoDependencia.find(r => r.id === tipoDependenciaid);
     return td ? `${td.tipodependencia}` : 'No Aplica'

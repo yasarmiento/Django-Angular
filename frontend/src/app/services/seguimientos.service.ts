@@ -18,6 +18,7 @@ export class SeguimientosService {
   getSeg(): Observable<SeguimientosI[]> {
     return this.http.get<SeguimientosI[]>(base);
   }
+  
 
   get(id: any): Observable<SeguimientosI> {
     return this.http.get<SeguimientosI>(`${base}/${id}`);

@@ -76,15 +76,6 @@
           required class="input-field">
       </div>
 
-
-      <div class="form-field">
-        <label for="fechaf">Fecha de Fin</label>
-        <input type="date" id="fechaf"
-          [ngModel]="formatDate(editMode ? editingProyecto.fechaf : crearProyectosI.fechaf)"
-          (ngModelChange)="editMode ? editingProyecto.fechaf = $event : crearProyectosI.fechaf = $event" name="fechaf"
-          required class="input-field">
-      </div>
-
       <div class="form-field">
         <label for="convocatoria">Convocatoria</label>
         <select id="convocatoria" [ngModel]="editMode ? editingProyecto.convocatoriaid : crearProyectosI.convocatoriaid"

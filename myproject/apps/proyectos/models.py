@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import timedelta
+from dateutil.relativedelta import relativedelta
 # Create your models here.
 
 class Convocatoria (models.Model):
@@ -43,15 +45,21 @@ class Proyecto (models.Model):
     codigo = models.CharField(max_length=150, null=True, default="N/A")
     plazo = models.IntegerField(default=0)
     fechai = models.DateField()
-    fechaf = models.DateField()
+    fechaf = models.DateField(null=True, blank=True)
     convocatoriaid = models.ForeignKey(Convocatoria, on_delete=models.CASCADE)
     roluniversidadid = models.ForeignKey(Rol_universidad, on_delete=models.CASCADE)
     operadorid = models.ForeignKey(Operador, on_delete=models.CASCADE)
     entidadfinanciadora = models.ForeignKey(EntidadFinanciadora, on_delete=models.CASCADE)
     grupoinvestigacionid = models.ForeignKey(Grupoinvestigacion, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.proyecto
+    
+    def save(self, *args, **kwargs):
+        if self.plazo > 0:
+            # Calcula la fecha "fechaf" sumando "plazo" meses a "fechai"
+            self.fechaf = self.fechai + relativedelta(months=self.plazo)
+        else:
+            self.fechaf = None
+        
+        super(Proyecto, self).save(*args, **kwargs)
 
 def archivo_upload_path(instance, filename):
     # Define la carpeta y el nombre del archivo

@@ -32,7 +32,7 @@ class Seguimientos (models.Model):
     inicio = models.DateField()
     fin = models.DateField(null=True, blank=True)
     responsable = models.CharField(max_length=40)
-    fechafin = models.DateField()
+    fechafin = models.DateField(null=True, blank=True)
     estadoid = models.ForeignKey(Estado, on_delete=models.CASCADE, null=True, blank=True)
     pasosid = models.ForeignKey(Pasos, on_delete=models.CASCADE)
     proyectoid = models.ForeignKey(Proyecto, on_delete=models.CASCADE)

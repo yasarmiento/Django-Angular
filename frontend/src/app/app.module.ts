@@ -46,6 +46,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { CalendarModule } from 'primeng/calendar';
 import { EntidadfaddComponent } from './components/entidadfadd/entidadfadd.component';
 import { ArchivoaddComponent } from './components/archivoadd/archivoadd.component';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ArchivoaddComponent } from './components/archivoadd/archivoadd.componen
     FileUploadModule,
     ToastModule,
     DialogModule,
+    ImageModule,
   ],
   providers: [MessageService,
   ],

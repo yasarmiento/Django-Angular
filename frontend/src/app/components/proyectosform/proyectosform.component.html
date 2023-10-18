@@ -1,29 +1,153 @@
 <div class="container m-2">
     <div *ngIf="proyectosform" class="project-details">
-        <h2 class="project-title"> <strong> Detalles del Proyecto </strong></h2>
-        <ul class="project-info-list">
-            <li><strong>Nombre del Proyecto:</strong> {{ proyectosform.proyecto }}</li>
-            <li><strong>Código del Proyecto:</strong> {{ proyectosform.codigo }}</li>
-            <li><strong>Plazo (Meses):</strong> {{ proyectosform.plazo }}</li>
-            <li><strong>Fecha de Inicio:</strong> {{ proyectosform.fechai | date: 'yyyy-MM-dd' }}</li>
-            <li><strong>Fecha de Fin:</strong> {{ proyectosform.fechaf | date: 'yyyy-MM-dd' }}</li>
-            <li><strong>Convocatoria:</strong> {{ obtenerConvocatoriaNombre(proyectosform.convocatoriaid) }}</li>
-            <li><strong>Rol Universidad:</strong> {{ obtenerRolU(proyectosform.roluniversidadid) }}</li>
-            <li><strong>Operador:</strong> {{ obtenerOperadorNombre(proyectosform.operadorid) }}</li>
-            <li><strong>Entidad Financiadora:</strong> {{ obtenerEntidadF(proyectosform.entidadfinanciadora) }}</li>
-            <li><strong>Grupo de Investigación:</strong> {{ obtenerGrupoI(proyectosform.grupoinvestigacionid) }}</li>
-        </ul>
-        <button pButton class="p-button-info p-button-outlined boton-redondo mr-2" icon="pi pi-pencil" label="Editar"
-            (click)="editProyecto(proyectosform)"></button>
-        <button pButton (click)="archivoVisible()" pButton icon="pi pi-file" label="Archivos"
-            class="boton-redondo p-button-warning p-button-outlined"></button>
+        <h2 class="project-title"><i class="pi pi-info-circle"></i> Detalles del Proyecto</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="proyecto"> <strong>Nombre del Proyecto</strong></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-book mt-2"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="proyecto" [disabled]="true"
+                            [(ngModel)]="proyectosform.proyecto" [readonly]="true">
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="codigo"><strong> Código del Proyecto</strong></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-key mt-2"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="codigo" [disabled]="true"
+                            [(ngModel)]="proyectosform.codigo" [readonly]="true">
+                    </div>
+                </div>
 
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="fechaf"><strong>Convocatoria</strong> </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-briefcase mt-2"></i></span>
+                        </div>
+                        <select class="form-control" id="fechaf" [disabled]="true">
+                            <option *ngFor="let i of convocatoriaNombre" [disabled]="true">{{ i.convocatoria }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="fechaf"><strong>Operador</strong> </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-briefcase mt-2"></i></span>
+                        </div>
+                        <select class="form-control" id="fechaf" [disabled]="true">
+                            <option *ngFor="let i of operadorNombre" [disabled]="true">{{ i.operador }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="fechaf"><strong>Grupo de investigacion</strong> </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-users mt-2"></i></span>
+                        </div>
+                        <select class="form-control" id="fechaf" [disabled]="true">
+                            <option *ngFor="let i of grupoINombre" [disabled]="true">{{
+                                i.grupoinvestigacion }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Agrega más campos aquí si es necesario -->
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="plazo"><strong>Plazo (Meses)</strong> </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-calendar mt-2"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="plazo" [disabled]="true"
+                            [(ngModel)]="proyectosform.plazo" [readonly]="true">
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="fechai"><strong>Fecha de Inicio</strong> </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-calendar-plus mt-2"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="fechai" [disabled]="true"
+                            [(ngModel)]="proyectosform.fechai" [readonly]="true">
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="fechaf"><strong>Fecha de Fin</strong> </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-calendar-minus mt-2"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="fechaf" [disabled]="true"
+                            [(ngModel)]="proyectosform.fechaf" [readonly]="true">
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="fechaf"><strong>Rol de la Universidad</strong> </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-user mt-2"></i></span>
+                        </div>
+                        <select class="form-control" id="fechaf" [disabled]="true">
+                            <option *ngFor="let i of rolU">{{
+                                i.rolU }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="sr-only" for="fechaf"><strong> Entidad finaciadora </strong> </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="pi pi-dollar mt-2"></i></span>
+                        </div>
+                        <select class="form-control" id="fechaf" [disabled]="true">
+                            <option *ngFor="let i of entidadFNombre">{{
+                                i.entidadfinanciadora }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Agrega más campos aquí si es necesario -->
+            </div>
+        </div>
+        <br>
+        <div class="button-container">
+            <button pButton class="p-button-info p-button-outlined boton-redondo mr-2" icon="pi pi-pencil"
+                label="Editar" (click)="editProyecto(proyectosform)"></button>
+            <button pButton class="p-button-warning p-button-outlined boton-redondo" icon="pi pi-file" label="Archivos"
+                (click)="archivoVisible()"></button>
+        </div>
     </div>
 </div>
 
+
+
+<!-- Tabla de datos de Seguimientos -->
+
 <div class="container m-2">
     <div class="project-details">
-        <p-card header="Seguimientos">
+        <button pButton type="button" label="Agregar Nueva Tarea" icon="pi pi-plus"
+            class="p-button-primary m-2 p-button-outlined boton-redondo" (click)="mostrarDialog()"></button>
+        <p-card header="Seguimiento">
             <div style="text-align: center">
                 <p-table [value]="seguimientosProyecto" [paginator]="true" [rows]="10" [columns]="seguimientosProyecto"
                     class="custom-table">
@@ -61,7 +185,8 @@
 
                             <td>
                                 <button pButton type="button" label="Editar" icon="pi pi-pencil"
-                                    class="p-button-warning m-2 p-button-outlined boton-redondo"></button>
+                                    class="p-button-warning m-2 p-button-outlined boton-redondo"
+                                    (click)="editarSeguimiento(rowData)"></button>
                             </td>
                         </tr>
                     </ng-template>
@@ -71,10 +196,112 @@
     </div>
 </div>
 
+<!-- Formulario para agregar y editar seguimientos -->
+
+<p-dialog header="{{ seguimientoEditando ? 'Editar Seguimiento' : 'Crear Seguimiento' }}" [(visible)]="displayDialog"
+    [modal]="true" [responsive]="true" [style]="{width: '80%'}">
+    <form (ngSubmit)="guardarSeguimiento()" class="form-container">
+        <div>
+            <div class="form-field">
+                <label for="descripciontarea">Descripción de Tarea</label>
+                <input type="text" id="descripciontarea"
+                    [ngModel]="seguimientoEditando ? seguimientoEditando.descripciontarea : nuevoSeguimiento.descripciontarea"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.descripciontarea = $event : nuevoSeguimiento.descripciontarea = $event"
+                    name="descripciontarea" required class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="duracion">Duración</label>
+                <input type="number" id="duracion"
+                    [ngModel]="seguimientoEditando ? seguimientoEditando.duracion : nuevoSeguimiento.duracion"
+                    name="duracion"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.duracion = $event : nuevoSeguimiento.duracion = $event"
+                    required class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="tarea_anterior">Tarea Anterior</label>
+                <select id="tarea_anterior"
+                    [ngModel]="seguimientoEditando ? seguimientoEditando.tarea_anterior : nuevoSeguimiento.tarea_anterior"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.tarea_anterior = $event : nuevoSeguimiento.tarea_anterior = $event"
+                    name="tarea_anterior" required class="input-field">
+                    <option *ngFor="let cont of seguimientosProyecto" [value]="cont.id">{{ cont.descripciontarea }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="diasdependencia">Días de Dependencia</label>
+                <input type="number" id="diasdependencia"
+                    [ngModel]="seguimientoEditando ? seguimientoEditando.diasdependencia : nuevoSeguimiento.diasdependencia"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.diasdependencia = $event : nuevoSeguimiento.diasdependencia = $event"
+                    name="diasdependencia" required class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="tipodependenciaid">Tipo de Dependencia</label>
+                <select id="tipodependenciaid"
+                    [ngModel]="seguimientoEditando ? seguimientoEditando.tipodependenciaid : nuevoSeguimiento.tipodependenciaid"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.tipodependenciaid = $event : nuevoSeguimiento.tipodependenciaid = $event"
+                    name="tipodependenciaid" required class="input-field">
+                    <option *ngFor="let cont of tipoDependencia" [value]="cont.id">{{ cont.tipodependencia }}</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="inicio">Inicio</label>
+                <input id="inicio" type="date" pInputText
+                    [ngModel]="seguimientoEditando ? formatDate(seguimientoEditando.inicio) : formatDate(nuevoSeguimiento.inicio)"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.inicio = $event : nuevoSeguimiento.inicio = $event"
+                    name="inicio" required class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="estadoid">Estado</label>
+                <select id="estadoid"
+                    [ngModel]="seguimientoEditando ? seguimientoEditando.estadoid : nuevoSeguimiento.estadoid"
+                    name="estadoid"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.estadoid = $event : nuevoSeguimiento.estadoid = $event"
+                    required class="input-field">
+                    <option *ngFor="let cont of estado" [value]="cont.id">{{ cont.estado }}</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="responsable">Responsable</label>
+                <input type="text" id="responsable"
+                    [ngModel]="seguimientoEditando ? seguimientoEditando.responsable : nuevoSeguimiento.responsable"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.responsable = $event : nuevoSeguimiento.responsable = $event"
+                    name="responsable" required class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="fechafin">Fecha de Fin Real</label>
+                <input id="fechafin" type="date" pInputText
+                    [ngModel]="seguimientoEditando ? formatDate(seguimientoEditando.fechafin) : formatDate(nuevoSeguimiento.fechafin)"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.fechafin = $event : nuevoSeguimiento.fechafin = $event"
+                    name="fechafin" required class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="pasosid">Pasos</label>
+                <select id="pasosid"
+                    [ngModel]="seguimientoEditando ? seguimientoEditando.pasosid : nuevoSeguimiento.pasosid"
+                    (ngModelChange)="seguimientoEditando ? seguimientoEditando.pasosid = $event : nuevoSeguimiento.pasosid = $event"
+                    name="pasosid" required class="input-field">
+                    <option *ngFor="let cont of pasos" [value]="cont.id">{{ cont.nivel }}</option>
+                </select>
+            </div>
+        </div>
+
+        <button pButton type="submit" label="{{ seguimientoEditando ? 'Actualizar' : 'Guardar' }}"
+            class="p-button-success p-button-outlined boton-redondo m-2"></button>
+    </form>
+</p-dialog>
+
 <!-- {Formulario de edicion de Proyecto}-->
 
-<p-dialog header="Formulario" [(visible)]="visible" [modal]="true" [responsive]="true"
-    [style]="{width: 'width', minWidth: 'minWidth'}">
+<p-dialog header="Formulario" [(visible)]="visible" [modal]="true" [responsive]="true" [style]="{width: '80%'}">
     <div>
         <form (ngSubmit)="guardarCambios()" class="form-container">
             <div class="form-field">
@@ -99,13 +326,6 @@
                 <label for="fechai">Fecha de Inicio</label>
                 <input type="date" id="fechai" [ngModel]="formatDate(proyectoEditado.fechai)"
                     (ngModelChange)="proyectoEditado.fechai = $event" name="fechai" required class="input-field">
-            </div>
-
-
-            <div class="form-field">
-                <label for="fechaf">Fecha de Fin</label>
-                <input type="date" id="fechaf" [ngModel]="formatDate(proyectoEditado.fechaf)"
-                    (ngModelChange)="proyectoEditado.fechaf = $event" name="fechaf" required class="input-field">
             </div>
 
             <div class="form-field">
@@ -168,7 +388,7 @@
 <p-dialog header="ArchivosProyecto" [(visible)]="archivosProyecto" [modal]="true" [responsive]="true"
     [style]="{width: 'width', minWidth: 'minWidth'}">
 
-    <p-table [value]="archivosProyectos" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+    <p-table [value]="archivosProyectos" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]"
         class="p-datatable-striped custom-table">
         <ng-template pTemplate="header" let-columns>
             <tr>
