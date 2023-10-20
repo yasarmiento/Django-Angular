@@ -1,3 +1,5 @@
+<!-- Vista de datos de los Proyectos -->
+
 <div class="container m-2">
     <div *ngIf="proyectosform" class="project-details">
         <h2 class="project-title"><i class="pi pi-info-circle"></i> Detalles del Proyecto</h2>
@@ -139,7 +141,89 @@
     </div>
 </div>
 
+<!-- {Formulario de edicion de Proyecto}-->
 
+<p-dialog header="Formulario" [(visible)]="visible" [modal]="true" [responsive]="true" [style]="{width: '80%'}">
+    <div>
+        <form (ngSubmit)="guardarCambios()" class="form-container">
+            <div class="form-field">
+                <label for="proyecto">Nombre del Proyecto</label>
+                <input type="text" id="proyecto" [(ngModel)]="proyectoEditado.proyecto" name="proyecto" required
+                    class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="codigo">Código del Proyecto</label>
+                <input type="text" id="codigo" [(ngModel)]="proyectoEditado.codigo" name="codigo" required
+                    class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="plazo">Plazo</label>
+                <input type="number" id="plazo" [(ngModel)]="proyectoEditado.plazo" name="plazo" required
+                    class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="fechai">Fecha de Inicio</label>
+                <input type="date" id="fechai" [ngModel]="formatDate(proyectoEditado.fechai)"
+                    (ngModelChange)="proyectoEditado.fechai = $event" name="fechai" required class="input-field">
+            </div>
+
+            <div class="form-field">
+                <label for="convocatoria">Convocatoria</label>
+                <select id="convocatoria" [(ngModel)]="proyectoEditado.convocatoriaid" name="convocatoria" required
+                    class="input-field">
+                    <option *ngFor="let convocatoria of convocatoriaNombre" [value]="convocatoria.id">{{
+                        convocatoria.convocatoria
+                        }}</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="rolUniversidad">Rol Universidad</label>
+                <select id="rolUniversidad" [(ngModel)]="proyectoEditado.roluniversidadid" name="rolUniversidad"
+                    required class="input-field">
+                    <option *ngFor="let rol of rolU" [value]="rol.id">{{ rol.rolU }}</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="operador">Operador</label>
+                <select id="operador" [(ngModel)]="proyectoEditado.operadorid" name="operador" required
+                    class="input-field">
+                    <option *ngFor="let operador of operadorNombre" [value]="operador.id">{{ operador.operador }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="entidadFinanciadora">Entidad Financiadora</label>
+                <select id="entidadFinanciadora" [(ngModel)]="proyectoEditado.entidadfinanciadora"
+                    name="entidadFinanciadora" required class="input-field">
+                    <option *ngFor="let entidad of entidadFNombre" [value]="entidad.id">{{ entidad.entidadfinanciadora
+                        }}</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="grupoInvestigacion">Grupo de Investigación</label>
+                <select id="grupoInvestigacion" [(ngModel)]="proyectoEditado.grupoinvestigacionid"
+                    name="grupoInvestigacion" required class="input-field">
+                    <option *ngFor="let grupo of grupoINombre" [value]="grupo.id">{{ grupo.grupoinvestigacion }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button pButton class="p-button-info p-button-outlined boton-redondo mr-2" type="submit">Guardar
+                    Cambios</button>
+                <button pButton class="p-button-danger p-button-outlined boton-redondo" type="button"
+                    (click)="CerrarDialog()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</p-dialog>
 
 <!-- Tabla de datos de Seguimientos -->
 
@@ -297,90 +381,6 @@
         <button pButton type="submit" label="{{ seguimientoEditando ? 'Actualizar' : 'Guardar' }}"
             class="p-button-success p-button-outlined boton-redondo m-2"></button>
     </form>
-</p-dialog>
-
-<!-- {Formulario de edicion de Proyecto}-->
-
-<p-dialog header="Formulario" [(visible)]="visible" [modal]="true" [responsive]="true" [style]="{width: '80%'}">
-    <div>
-        <form (ngSubmit)="guardarCambios()" class="form-container">
-            <div class="form-field">
-                <label for="proyecto">Nombre del Proyecto</label>
-                <input type="text" id="proyecto" [(ngModel)]="proyectoEditado.proyecto" name="proyecto" required
-                    class="input-field">
-            </div>
-
-            <div class="form-field">
-                <label for="codigo">Código del Proyecto</label>
-                <input type="text" id="codigo" [(ngModel)]="proyectoEditado.codigo" name="codigo" required
-                    class="input-field">
-            </div>
-
-            <div class="form-field">
-                <label for="plazo">Plazo</label>
-                <input type="number" id="plazo" [(ngModel)]="proyectoEditado.plazo" name="plazo" required
-                    class="input-field">
-            </div>
-
-            <div class="form-field">
-                <label for="fechai">Fecha de Inicio</label>
-                <input type="date" id="fechai" [ngModel]="formatDate(proyectoEditado.fechai)"
-                    (ngModelChange)="proyectoEditado.fechai = $event" name="fechai" required class="input-field">
-            </div>
-
-            <div class="form-field">
-                <label for="convocatoria">Convocatoria</label>
-                <select id="convocatoria" [(ngModel)]="proyectoEditado.convocatoriaid" name="convocatoria" required
-                    class="input-field">
-                    <option *ngFor="let convocatoria of convocatoriaNombre" [value]="convocatoria.id">{{
-                        convocatoria.convocatoria
-                        }}</option>
-                </select>
-            </div>
-
-            <div class="form-field">
-                <label for="rolUniversidad">Rol Universidad</label>
-                <select id="rolUniversidad" [(ngModel)]="proyectoEditado.roluniversidadid" name="rolUniversidad"
-                    required class="input-field">
-                    <option *ngFor="let rol of rolU" [value]="rol.id">{{ rol.rolU }}</option>
-                </select>
-            </div>
-
-            <div class="form-field">
-                <label for="operador">Operador</label>
-                <select id="operador" [(ngModel)]="proyectoEditado.operadorid" name="operador" required
-                    class="input-field">
-                    <option *ngFor="let operador of operadorNombre" [value]="operador.id">{{ operador.operador }}
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-field">
-                <label for="entidadFinanciadora">Entidad Financiadora</label>
-                <select id="entidadFinanciadora" [(ngModel)]="proyectoEditado.entidadfinanciadora"
-                    name="entidadFinanciadora" required class="input-field">
-                    <option *ngFor="let entidad of entidadFNombre" [value]="entidad.id">{{ entidad.entidadfinanciadora
-                        }}</option>
-                </select>
-            </div>
-
-            <div class="form-field">
-                <label for="grupoInvestigacion">Grupo de Investigación</label>
-                <select id="grupoInvestigacion" [(ngModel)]="proyectoEditado.grupoinvestigacionid"
-                    name="grupoInvestigacion" required class="input-field">
-                    <option *ngFor="let grupo of grupoINombre" [value]="grupo.id">{{ grupo.grupoinvestigacion }}
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-actions">
-                <button pButton class="p-button-info p-button-outlined boton-redondo mr-2" type="submit">Guardar
-                    Cambios</button>
-                <button pButton class="p-button-danger p-button-outlined boton-redondo" type="button"
-                    (click)="CerrarDialog()">Cancelar</button>
-            </div>
-        </form>
-    </div>
 </p-dialog>
 
 <!-- {Vsta de Archivos por Proyecto} -->

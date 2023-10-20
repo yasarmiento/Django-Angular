@@ -21,7 +21,6 @@ import { RolUComponent } from './components/rol-u/rol-u.component';
 import { OperadorComponent } from './components/operador/operador.component';
 import { EntidadfinanciadoraComponent } from './components/entidadfinanciadora/entidadfinanciadora.component';
 import { TipoarchivoComponent } from './components/tipoarchivo/tipoarchivo.component';
-import { GrupoinvestigacionComponent } from './components/grupoinvestigacion/grupoinvestigacion.component';
 import { ArchivoComponent } from './components/archivo/archivo.component';
 import { ProyectosformComponent } from './components/proyectosform/proyectosform.component';
 import { ProyectosaddComponent } from './components/proyectosadd/proyectosadd.component';
@@ -58,7 +57,6 @@ import { ImageModule } from 'primeng/image';
     OperadorComponent,
     EntidadfinanciadoraComponent,
     TipoarchivoComponent,
-    GrupoinvestigacionComponent,
     ArchivoComponent,
     ProyectosformComponent,
     ProyectosaddComponent,
