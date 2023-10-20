@@ -113,6 +113,24 @@ export class ProyectosformComponent implements OnInit {
     });
   }
 
+  refreshList(): void {
+    this.obtenerSeguimientos();
+    this.nuevoSeguimiento = {
+      descripciontarea: '',
+      duracion: 0,
+      tarea_anterior: null,
+      diasdependencia: 0,
+      tipodependenciaid: null,
+      inicio: new Date(),
+      estadoid: null,
+      responsable: '',
+      fechafin: new Date(),
+      pasosid: null,
+      proyectoid: null,
+    };
+
+    this.editingIndex = -1;
+  }
 
   obtenerSeguimientos(): void {
     this.seguimientoService.getSeg()
@@ -123,10 +141,6 @@ export class ProyectosformComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
-  }
-
-  obtenerTareasAnteriores() {
-
   }
 
   obtenerSeguimientoss(): void {
@@ -233,9 +247,9 @@ export class ProyectosformComponent implements OnInit {
       }
     }
     this.seguimientoEditando = null; // Reinicializa la variable de edición
-          setTimeout(() => {
-            location.reload();
-          }, 500); // Espera 1/2 seguNdo antes de recargar la página
+    setTimeout(() => {
+      location.reload();
+    }, 500); // Espera 1/2 seguNdo antes de recargar la página
   }
 
   editarSeguimiento(seguimiento: SeguimientosI) {
@@ -367,7 +381,6 @@ export class ProyectosformComponent implements OnInit {
     return tareaa ? `${tareaa.descripciontarea}` : 'No Aplica';
 
   }
-
   obtenerTipoDependencia(tipoDependenciaid: number) {
     const td = this.tipoDependencia.find(r => r.id === tipoDependenciaid);
     return td ? `${td.tipodependencia}` : 'No Aplica'

@@ -21,7 +21,9 @@ export class ProyectosComponent {
   operadorNombre: any[] = [];
   entidadFNombre: any[] = [];
   grupoINombre: any[] = [];
+
   currentIndex = -1;
+
   editingProyecto: ProyectosI = {
     proyecto: '',
     codigo: '',
@@ -96,7 +98,6 @@ export class ProyectosComponent {
       entidadfinanciadora: '',
       grupoinvestigacionid: '',
     };
-
     this.currentIndex = -1;
   }
 
@@ -106,7 +107,6 @@ export class ProyectosComponent {
   }
 
   showDialog() {
-    console.log("Creando un proyecto")
     this.visible = true;
   }
 
